@@ -1,0 +1,18 @@
+package get
+
+import (
+	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
+	"github.com/red-hat-storage/odf-cli/pkg/rook/osd"
+	"github.com/spf13/cobra"
+)
+
+var getRecoveryProfile = &cobra.Command{
+	Use:                "recovery-profile",
+	Short:              "Get the recovery profile value currently set for the osd",
+	DisableFlagParsing: true,
+	Args:               cobra.NoArgs,
+	Run: func(cmd *cobra.Command, args []string) {
+		clientsets := root.GetClientsets(cmd.Context())
+		osd.GetProfile(cmd.Context(), clientsets, root.OperatorNamespace, root.StorageClusterNamespace)
+	},
+}
