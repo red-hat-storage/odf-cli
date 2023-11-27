@@ -13,3 +13,10 @@ func SetProfile(ctx context.Context, clientsets *k8sutil.Clientsets, recoveryOpt
 
 	exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, true, false)
 }
+
+func SetLogLevel(ctx context.Context, clientsets *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace string, args []string) {
+
+	cephArgs := []string{"config", "set", args[0], args[1], args[2]}
+
+	exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, true, false)
+}
