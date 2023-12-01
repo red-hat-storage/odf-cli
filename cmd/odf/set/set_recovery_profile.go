@@ -9,6 +9,7 @@ import (
 var setRecoveryProfile = &cobra.Command{
 	Use:                "recovery-profile",
 	Short:              "Set the recovery profile to favor new IO, recovery, or balanced mode with options high_client_ops, high_recovery_ops, or balanced",
+	Example:            "odf set recovery-profile <option>",
 	DisableFlagParsing: true,
 	ValidArgs:          []string{"high_client_ops", "high_recovery_ops", "balanced"},
 	Args:               cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),

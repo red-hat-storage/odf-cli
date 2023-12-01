@@ -9,6 +9,7 @@ import (
 var getRecoveryProfile = &cobra.Command{
 	Use:                "recovery-profile",
 	Short:              "Get the recovery profile value currently set for the osd",
+	Example:            "odf get recovery-profile",
 	DisableFlagParsing: true,
 	Args:               cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
