@@ -13,5 +13,5 @@ var SetCmd = &cobra.Command{
 
 func init() {
 	SetCmd.AddCommand(setRecoveryProfile)
-	SetCmd.AddCommand(setLogLevelCmd)
+	SetCmd.AddCommand(setCephLogLevelCmd)
 }
