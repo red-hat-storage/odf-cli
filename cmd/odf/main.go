@@ -5,6 +5,7 @@ import (
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/set"
+	"github.com/red-hat-storage/odf-cli/cmd/odf/subvolume"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
 )
 
@@ -21,5 +22,6 @@ func addcommands() {
 		set.SetCmd,
 		get.GetCmd,
 		rook.CephCmd,
+		subvolume.SubvolumeCmd,
 	)
 }
