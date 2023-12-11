@@ -10,6 +10,8 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   More information about the ceph subsystems can be found [here](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems)
 - `odf ceph purge-osd <ID>`: Permanently remove an OSD from the cluster.
 - `odf help` : Display help text
+- `odf subvolume ls`: Display all the subvolumes
+- `odf subvolume delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
 
 ## Documentation
 
