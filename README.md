@@ -44,3 +44,32 @@ These are the arguments that apply to all commands:
     ```bash
     odf --context=$(oc config current-context) [commands]
     ```
+
+## Installation
+
+### Build from source
+
+#### Requirements
+
+- Go >= 1.21
+- ODF storage cluster should be installed.
+
+### Build and Run
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/red-hat-storage/odf-cli.git
+    ```
+
+2. Change the directory and build the binary
+
+    ```bash
+    cd odf-cli/ && make build
+    ```
+
+3. Use the binary present in the`/bin/` directory to run the commands
+
+    ```bash
+    ./bin/odf -h
+    ```
