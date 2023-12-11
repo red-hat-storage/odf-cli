@@ -3,6 +3,7 @@ module github.com/red-hat-storage/odf-cli
 go 1.21
 
 require (
+	github.com/pkg/errors v0.9.1
 	github.com/rook/kubectl-rook-ceph v0.6.0
 	github.com/rook/rook v1.12.7
 	github.com/spf13/cobra v1.7.0
@@ -62,7 +63,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/openshift/api v0.0.0-20231010191030-1f9525271dda // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.17.0 // indirect
 	github.com/prometheus/client_model v0.5.0 // indirect
 	github.com/prometheus/common v0.44.0 // indirect

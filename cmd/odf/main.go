@@ -1,6 +1,7 @@
 package main
 
 import (
+	rook "github.com/red-hat-storage/odf-cli/cmd/odf/ceph"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/set"
@@ -19,5 +20,6 @@ func addcommands() {
 	root.RootCmd.AddCommand(
 		set.SetCmd,
 		get.GetCmd,
+		rook.CephCmd,
 	)
 }

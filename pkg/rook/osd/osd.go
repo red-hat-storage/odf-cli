@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/pkg/errors"
 	"github.com/rook/kubectl-rook-ceph/pkg/exec"
 	"github.com/rook/kubectl-rook-ceph/pkg/k8sutil"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
@@ -37,4 +38,22 @@ func SetProfile(ctx context.Context, clientsets *k8sutil.Clientsets, recoveryOpt
 	cephArgs := []string{"config", "set", "osd", "osd_mclock_profile", recoveryOption}
 
 	exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, false, true)
+}
+
+type SafeToDestroyStatus struct {
+	SafeToDestroy []int `json:"safe_to_destroy"`
+}
+
+func SafeToDestroy(ctx context.Context, clientsets *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace, osdID string) (bool, error) {
+	args := []string{"osd", "safe-to-destroy", osdID}
+	out := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", args, operatorNamespace, storageClusterNamespace, true, false)
+
+	var safeToDestroy SafeToDestroyStatus
+	if err := json.Unmarshal([]byte(out), &safeToDestroy); err != nil {
+		return false, errors.Wrapf(err, string(out))
+	}
+	if len(safeToDestroy.SafeToDestroy) != 0 && fmt.Sprint(safeToDestroy.SafeToDestroy[0]) == osdID {
+		return true, nil
+	}
+	return false, nil
 }
