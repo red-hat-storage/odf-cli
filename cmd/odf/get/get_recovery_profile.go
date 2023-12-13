@@ -13,7 +13,6 @@ var getRecoveryProfile = &cobra.Command{
 	DisableFlagParsing: true,
 	Args:               cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		clientsets := root.GetClientsets(cmd.Context())
-		osd.GetProfile(cmd.Context(), clientsets, root.OperatorNamespace, root.StorageClusterNamespace)
+		osd.GetProfile(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace)
 	},
 }

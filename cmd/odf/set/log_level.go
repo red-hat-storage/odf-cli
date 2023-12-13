@@ -14,7 +14,6 @@ var setCephLogLevelCmd = &cobra.Command{
 	Args:               cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
-		clientsets := root.GetClientsets(ctx)
-		rook.SetCephLogLevel(ctx, clientsets, root.OperatorNamespace, root.StorageClusterNamespace, args[0], args[1], args[2])
+		rook.SetCephLogLevel(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, args[0], args[1], args[2])
 	},
 }
