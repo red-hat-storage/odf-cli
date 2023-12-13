@@ -14,7 +14,6 @@ var setRecoveryProfile = &cobra.Command{
 	ValidArgs:          []string{"high_client_ops", "high_recovery_ops", "balanced"},
 	Args:               cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
-		clientsets := root.GetClientsets(cmd.Context())
-		osd.SetProfile(cmd.Context(), clientsets, args[0], root.OperatorNamespace, root.StorageClusterNamespace)
+		osd.SetProfile(cmd.Context(), root.ClientSets, args[0], root.OperatorNamespace, root.StorageClusterNamespace)
 	},
 }

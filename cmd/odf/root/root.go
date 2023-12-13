@@ -18,6 +18,7 @@ var (
 	KubeContext             string
 	OperatorNamespace       string
 	StorageClusterNamespace string
+	ClientSets              *k8sutil.Clientsets
 )
 
 // RootCmd represents the odf command
@@ -29,6 +30,7 @@ var RootCmd = &cobra.Command{
 		if StorageClusterNamespace != "" && OperatorNamespace == "" {
 			OperatorNamespace = StorageClusterNamespace
 		}
+		ClientSets = getClientsets(cmd.Context())
 	},
 }
 
@@ -48,7 +50,7 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&KubeContext, "context", "", "Openshift context to use")
 }
 
-func GetClientsets(ctx context.Context) *k8sutil.Clientsets {
+func getClientsets(ctx context.Context) *k8sutil.Clientsets {
 	var err error
 
 	clientsets := &k8sutil.Clientsets{}

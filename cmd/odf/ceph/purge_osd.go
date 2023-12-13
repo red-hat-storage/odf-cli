@@ -23,11 +23,10 @@ var cephPurgeOsdCmd = &cobra.Command{
 	PreRunE: validateOsdID,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
-		clientsets := root.GetClientsets(ctx)
 		forceflagValue := "false"
 		osdID := args[0]
 
-		safeToDestroy, err := osd.SafeToDestroy(ctx, clientsets, root.OperatorNamespace, root.StorageClusterNamespace, osdID)
+		safeToDestroy, err := osd.SafeToDestroy(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID)
 		if !safeToDestroy {
 			var answer string
 			yesForceDestroyOSD := "yes-force-destroy-osd"
@@ -44,7 +43,7 @@ var cephPurgeOsdCmd = &cobra.Command{
 			logging.Fatal(errors.Wrapf(err, "failed to check if osd.%s is safe to destroy", osdID))
 		}
 
-		rook.PurgeOsd(ctx, clientsets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, forceflagValue)
+		rook.PurgeOsd(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, forceflagValue)
 	},
 }
 

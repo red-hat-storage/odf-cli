@@ -7,12 +7,14 @@ This would consider all the cases where we can have stale subvolume
 and delete them without impacting other resources and attached volumes.
 
 The subvolume command supports the following sub commands:
-* `ls` : [ls](#ls) 
-* `delete`: [delete](#delete) 
-* 
+
+* [ls](#ls)
+* [delete](#delete)
+
 ## ls
 
 This command will lists all the subvolumes. It also accepts the stale flag to check for stale subvolumes.
+
 * `--stale`: lists only stale subvolumes
 
 ```bash
@@ -38,7 +40,8 @@ odf subvolume ls --stale
 This command deletes stale subvolumes after user's confirmation.
 `delete <subvolumes> <filesystem> <subvolumegroup>`:
 It will delete only the stale subvolumes to prevent any loss of data.
-  * subvolumes: comma-separated list of subvolumes of same filesystem and subvolumegroup.
+
+* subvolumes: comma-separated list of subvolumes of same filesystem and subvolumegroup.
 
 ```bash
 odf subvolume delete csi-vol-427774b4-340b-11ed-8d66-0242ac110004 ocs-storagecluster csi
