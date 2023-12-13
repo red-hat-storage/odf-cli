@@ -1,17 +1,11 @@
-# Ceph
-
-The ceph command supports the following sub-commands:
-
-* [purge-osd](#purge-osd)
-
-## purge-osd
+# purge-osd
 
 The purge-osd command permanently removes an OSD from the cluster.
 
 If the OSD is not safe to remove, a prompt will confirm if you are sure the OSD should be removed.
 
 ```bash
-odf ceph purge-osd 0
+odf purge-osd 0
 # Error: command terminated with exit code 16
 # Error EBUSY: OSD(s) 0 have 12 pgs currently mapped to them.
 # Warning: Are you sure you want to purge osd.0? The OSD is *not* safe to destroy. This may lead to data loss. If you are sure the OSD should be purged, enter 'yes-force-destroy-osd'
