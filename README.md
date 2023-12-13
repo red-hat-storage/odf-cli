@@ -8,7 +8,10 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf get recovery-profile`: Get the recovery profile value.
 - `odf set ceph-log-level <daemon> <subsystem> <log-level>`: Set the log level for Ceph daemons like OSD, mon, mds etc.
   More information about the ceph subsystems can be found [here](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems)
+- `odf ceph purge-osd <ID>`: Permanently remove an OSD from the cluster.
 - `odf help` : Display help text
+- `odf subvolume ls`: Display all the subvolumes
+- `odf subvolume delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
 
 ## Documentation
 
@@ -16,6 +19,7 @@ Visit docs below for complete details about each command and their flags uses.
 
 - [set](docs/set.md)
 - [get](docs/get.md)
+- [purge-osd](docs/ceph.md#purge-osd)
 
 ### Root args
 
@@ -43,4 +47,33 @@ These are the arguments that apply to all commands:
 
     ```bash
     odf --context=$(oc config current-context) [commands]
+    ```
+
+## Installation
+
+### Build from source
+
+#### Requirements
+
+- Go >= 1.21
+- ODF storage cluster should be installed.
+
+### Build and Run
+
+1. Clone the repository
+
+    ```bash
+    git clone https://github.com/red-hat-storage/odf-cli.git
+    ```
+
+2. Change the directory and build the binary
+
+    ```bash
+    cd odf-cli/ && make build
+    ```
+
+3. Use the binary present in the`/bin/` directory to run the commands
+
+    ```bash
+    ./bin/odf -h
     ```
