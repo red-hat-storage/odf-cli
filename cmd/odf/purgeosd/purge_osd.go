@@ -1,4 +1,4 @@
-package rook
+package purgeosd
 
 import (
 	"fmt"
@@ -15,11 +15,11 @@ import (
 
 var forceFlag = "force"
 
-var cephPurgeOsdCmd = &cobra.Command{
+var CephPurgeOsdCmd = &cobra.Command{
 	Use:     "purge-osd",
 	Short:   "Permanently remove an OSD from the cluster.",
 	Args:    cobra.ExactArgs(1),
-	Example: "odf ceph purge-osd <ID>",
+	Example: "odf purge-osd <ID>",
 	PreRunE: validateOsdID,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
