@@ -7,7 +7,7 @@ import (
 )
 
 var setCephLogLevelCmd = &cobra.Command{
-	Use:                "ceph-log-level",
+	Use:                "log-level",
 	Short:              "Set different log levels for ceph components like mon, osd and mds",
 	Example:            "odf set ceph-log-level osd crush 10",
 	DisableFlagParsing: true,
