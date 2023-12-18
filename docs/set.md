@@ -2,8 +2,10 @@
 
 The set command supports the following sub-commands:
 
-* [recovery-profile](#recovery-profile)
-* [ceph-log-level](#ceph-log-level)
+- [Set](#set)
+  - [recovery-profile](#recovery-profile)
+  - [ceph](#ceph)
+    - [log-level](#log-level)
 
 ## recovery-profile
 
@@ -20,13 +22,16 @@ odf set recovery-profile high_client_ops
 
 To verify the recovery profile setting run [odf get recovery-profile](get.md#recovery-profile).
 
-## ceph-log-level
+## ceph
+The `ceph` command helps update the Ceph configuration.
+
+### log-level
 
 This command will set the log level for different ceph [subsystems](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems).
 The `debug_` prefix will be automatically added to the subsystem when enabling the logging.
 
 ``` bash
-odf set ceph-log-level osd crush 20
+odf set ceph log-level osd crush 20
 ```
 
 Once the logging efforts are complete, restore the systems to their default or to a level suitable for normal operations.
