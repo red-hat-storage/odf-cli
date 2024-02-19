@@ -4,10 +4,12 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 
 ## Commands
 
-- `odf set recovery-profile <profile>`: Set the recovery profile to favor new IO, recovery, or balanced mode with options `high_client_ops`, `high_recovery_ops`, or `balanced`. The default is `balanced`.
-- `odf get recovery-profile`: Get the recovery profile value.
-- `odf set ceph log-level <daemon> <subsystem> <log-level>`: Set the log level for Ceph daemons like OSD, mon, mds etc.
-  More information about the ceph subsystems can be found [here](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems)
+- `odf set`:
+  - `recovery-profile <profile>`: Set the recovery profile to favor new IO, recovery, or balanced mode with options `high_client_ops`, `high_recovery_ops`, or `balanced`. The default is `balanced`.
+  - `ceph log-level <daemon> <subsystem> <log-level>`: Set the log level for Ceph daemons like OSD, mon, mds etc. More information about the ceph subsystems can be found [here](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems)
+- `odf get`:
+  - `recovery-profile`: Get the recovery profile value.
+  - `health`: Check health of the cluster and common configuration issues.
 - `odf purge-osd <ID>`: Permanently remove an OSD from the cluster.
 - `odf help` : Display help text
 - `odf subvolume ls`: Display all the subvolumes
