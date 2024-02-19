@@ -12,6 +12,8 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf help` : Display help text
 - `odf subvolume ls`: Display all the subvolumes
 - `odf subvolume delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
+- `odf mons`
+  - `restore-quorum <monID>`: Restore the mon quorum based on a single healthy mon since quorum was lost with the other mons
 
 ## Documentation
 
@@ -20,6 +22,7 @@ Visit docs below for complete details about each command and their flags uses.
 - [set](docs/set.md)
 - [get](docs/get.md)
 - [purge-osd](docs/purge_osd.md)
+- [mon](docs/mons.md)
 
 ### Root args
 
