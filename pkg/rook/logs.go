@@ -13,7 +13,9 @@ func SetCephLogLevel(ctx context.Context, clientsets *k8sutil.Clientsets, operat
 
 	cephArgs := []string{"config", "set", component, fmt.Sprintf("debug_%s", subsystem), level}
 
-	exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, false, true)
-
+	_, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, false)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to run ceph command with args %v. %v", cephArgs, err))
+	}
 	logging.Info("successfully set the log levels for %q subsystem %q as %q", component, subsystem, level)
 }
