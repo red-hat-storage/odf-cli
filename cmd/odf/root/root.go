@@ -9,6 +9,7 @@ import (
 	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
 	"github.com/spf13/cobra"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/dynamic"
 	k8s "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
@@ -77,6 +78,11 @@ func getClientsets(ctx context.Context) *k8sutil.Clientsets {
 	}
 
 	clientsets.Kube, err = k8s.NewForConfig(clientsets.KubeConfig)
+	if err != nil {
+		logging.Fatal(err)
+	}
+
+	clientsets.Dynamic, err = dynamic.NewForConfig(clientsets.KubeConfig)
 	if err != nil {
 		logging.Fatal(err)
 	}
