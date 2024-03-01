@@ -14,4 +14,5 @@ var GetCmd = &cobra.Command{
 
 func init() {
 	GetCmd.AddCommand(getRecoveryProfile)
+	GetCmd.AddCommand(rookCmd)
 }
