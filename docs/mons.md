@@ -33,100 +33,126 @@ Before the restore proceeds, you will be prompted if you want to continue.
 For example, here is the output in a test cluster up to the point of starting the restore.
 
 ```bash
-$ odf mons restore-quorum c
-mon=b, endpoint=192.168.64.168:6789
-mon=c, endpoint=192.168.64.167:6789
-mon=a, endpoint=192.168.64.169:6789
-Info: Check for the running toolbox
-Info: Waiting for the pod from deployment "rook-ceph-tools" to be running
-deployment.apps/rook-ceph-tools condition met
+$ odf mons restore-quorum a
+Info: mon "a" state is "leader"
+Info: mon=b, endpoints=172.30.157.248:3300
 
-Warning: Restoring mon quorum to mon c (192.168.64.167)
-Info: The mons to discard are: b a
-Info: Are you sure you want to restore the quorum to mon "c"? If so, enter: yes-really-restore
+Info: mon=c, endpoints=172.30.220.5:3300
+
+Info: mon=a, endpoints=172.30.124.246:3300
+
+Info: printing fsid secret d9a71ab9-a497-4da2-af36-53dcd410a5e9
+
+Info: Check for the running toolbox
+Info: fetching the deployment rook-ceph-tools to be running
+
+Info: deployment rook-ceph-tools exists
+
+Info: Restoring mon quorum to mon a 172.30.124.246
+
+Info: The mons to discard are: [b c]
+
+Info: The cluster fsid is d9a71ab9-a497-4da2-af36-53dcd410a5e9
+
+Warning: Are you sure you want to restore the quorum to mon a? If so, enter 'yes-really-restore'
 ```
 
 After entering `yes-really-restore`, the restore continues with output as such:
 
 ```bash
-Info: proceeding
-deployment.apps/rook-ceph-operator scaled
-deployment.apps/rook-ceph-mon-a scaled
-deployment.apps/rook-ceph-mon-b scaled
-deployment.apps/rook-ceph-mon-c scaled
-Info: Waiting for operator and mon pods to stop
-pod/rook-ceph-operator-b5c96c99b-ggfg5 condition met
-pod/rook-ceph-mon-a-6cd67d89b4-5qhgj condition met
-pod/rook-ceph-mon-b-7d78cfd5-drztj condition met
-pod/rook-ceph-mon-c-56499b77d7-sbmfb condition met
-setting debug mode for "rook-ceph-mon-c"
-Info: setting debug command to main container
-Info: get pod for deployment rook-ceph-mon-c
-deployment.apps/rook-ceph-mon-c-debug created
-Info: ensure the debug deployment rook-ceph-mon-c is scaled up
-deployment.apps/rook-ceph-mon-c-debug scaled
-Info: Waiting for the pod from deployment "rook-ceph-mon-c-debug" to be running
-deployment.apps/rook-ceph-mon-c-debug condition met
-Info: Started debug pod, restoring the mon quorum in the debug pod
+Info: proceeding with resorting quorum
+Info: Waiting for operator pod to stop
+Info: rook-ceph-operator deployment scaled down
+Info: Waiting for bad mon pod to stop
+Info: deployment.apps/rook-ceph-mon-b scaled
+
+Info: deployment.apps/rook-ceph-mon-c scaled
+
+Info: fetching the deployment rook-ceph-mon-a to be running
+
+Info: deployment rook-ceph-mon-a exists
+
+Info: setting maintenance command to main container
+Info: deployment rook-ceph-mon-a scaled down
+
+Info: waiting for the deployment pod rook-ceph-mon-a-6849c8548f-p9lwb to be deleted
+
+Info: ensure the maintenance deployment rook-ceph-mon-a is scaled up
+
+Info: waiting for pod with label "ceph_daemon_type=mon,ceph_daemon_id=a" in namespace "openshift-storage" to be running
+Info: waiting for pod with label "ceph_daemon_type=mon,ceph_daemon_id=a" in namespace "openshift-storage" to be running
+Info: waiting for pod with label "ceph_daemon_type=mon,ceph_daemon_id=a" in namespace "openshift-storage" to be running
+Info: pod rook-ceph-mon-a-maintenance-56bd9c6cfb-w9kjs is ready for maintenance operations
+Info: fetching the deployment rook-ceph-mon-a-maintenance to be running
+
+Info: deployment rook-ceph-mon-a-maintenance exists
+
+Info: Started maintenance pod, restoring the mon quorum in the maintenance pod
 Info: Extracting the monmap
 
 # Lengthy rocksdb output removed
 
+Info: Finished updating the monmap!
 Info: Printing final monmap
 monmaptool: monmap file /tmp/monmap
-epoch 3
-fsid 818e8153-f17f-4ae3-b21f-078a4069affa
-last_changed 2022-10-19T22:04:46.097595+0000
-created 2022-10-19T22:01:11.347220+0000
+epoch 4
+fsid d9a71ab9-a497-4da2-af36-53dcd410a5e9
+last_changed 2024-03-01T07:24:34.567176+0000
+created 2024-03-01T07:23:45.031715+0000
 min_mon_release 17 (quincy)
 election_strategy: 1
-0: [v2:192.168.64.167:3300/0,v1:192.168.64.167:6789/0] mon.c
+0: v2:172.30.124.246:3300/0 mon.a
 Info: Restoring the mons in the rook-ceph-mon-endpoints configmap to the good mon
-configmap/rook-ceph-mon-endpoints patched
-Info: Stopping the debug pod for mon c
-setting debug mode for "rook-ceph-mon-c-debug"
-Info: removing debug mode from "rook-ceph-mon-c-debug"
-deployment.apps "rook-ceph-mon-c-debug" deleted
-deployment.apps/rook-ceph-mon-c scaled
-Info: Check that the restored mon is responding
-timed out
-command terminated with exit code 1
-Info: 0: waiting for ceph status to confirm single mon quorum
-Info: sleeping 5
-timed out
-command terminated with exit code 1
-Info: 1: waiting for ceph status to confirm single mon quorum
-Info: sleeping 5
-timed out
-command terminated with exit code 1
-Info: 2: waiting for ceph status to confirm single mon quorum
-Info: sleeping 5
-timed out
-command terminated with exit code 1
-Info: 3: waiting for ceph status to confirm single mon quorum
-Info: sleeping 5
+Info: Stopping the maintenance pod for mon a.
 
-Info: finished waiting for ceph status
-Info: Purging the bad mons: b a
-Info: purging old mon: b
-deployment.apps "rook-ceph-mon-b" deleted
-Error from server (NotFound): services "rook-ceph-mon-b" not found
-Info: purging mon pvc if exists
-Error from server (NotFound): persistentvolumeclaims "rook-ceph-mon-b" not found
-Info: purging old mon: a
-deployment.apps "rook-ceph-mon-a" deleted
-Error from server (NotFound): services "rook-ceph-mon-a" not found
-Info: purging mon pvc if exists
-Error from server (NotFound): persistentvolumeclaims "rook-ceph-mon-a" not found
-Info: Mon quorum was successfully restored to mon c
+Info: fetching the deployment rook-ceph-mon-a-maintenance to be running
+
+Info: deployment rook-ceph-mon-a-maintenance exists
+
+Info: removing maintenance mode from deployment rook-ceph-mon-a-maintenance
+
+Info: Successfully deleted maintenance deployment and restored deployment "rook-ceph-mon-a"
+Info: Check that the restored mon is responding
+Error: failed to get the status of ceph cluster. failed to run command. failed to run command. command terminated with exit code 1
+Info: 1: waiting for ceph status to confirm single mon quorum.
+
+Info: current ceph status output
+
+Info: sleeping for 5 seconds
+
+Info: finished waiting for ceph status   cluster:
+    id:     d9a71ab9-a497-4da2-af36-53dcd410a5e9
+    health: HEALTH_OK
+
+  services:
+    mon: 1 daemons, quorum a (age 18s)
+    mgr: a(active, since 19m)
+    mds: 1/1 daemons up, 1 hot standby
+    osd: 3 osds: 3 up (since 18m), 3 in (since 18m)
+
+  data:
+    volumes: 1/1 healthy
+    pools:   4 pools, 113 pgs
+    objects: 31 objects, 582 KiB
+    usage:   32 MiB used, 1.5 TiB / 1.5 TiB avail
+    pgs:     113 active+clean
+
+  io:
+    client:   853 B/s rd, 1 op/s rd, 0 op/s wr
+
+
+
+Info: Purging the bad mons []
+
+Info: Mon quorum was successfully restored to mon a
+
 Info: Only a single mon is currently running
-Info: Press Enter to start the operator and expand to full mon quorum again
+Info: Enter 'continue' to start the operator and expand to full mon quorum again
 ```
 
 After reviewing that the cluster is healthy with a single mon, press Enter to continue:
 
 ```bash
 Info: continuing
-deployment.apps/rook-ceph-operator scaled
-Info: The operator will now expand to full mon quorum
+Info: proceeding with resorting quorum
 ```
