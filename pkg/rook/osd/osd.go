@@ -22,10 +22,13 @@ type OsdConfig struct {
 func GetProfile(ctx context.Context, clientsets *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace string) {
 	cephArgs := []string{"config", "get", "osd", "--format", "json"}
 
-	out := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, true, true)
+	out, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, true)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to run command ceph with args %v: %v", cephArgs, err))
+	}
 
 	var config Config
-	err := json.Unmarshal([]byte(out), &config)
+	err = json.Unmarshal([]byte(out), &config)
 	if err != nil {
 		logging.Error(err)
 		return
@@ -37,7 +40,10 @@ func SetProfile(ctx context.Context, clientsets *k8sutil.Clientsets, recoveryOpt
 
 	cephArgs := []string{"config", "set", "osd", "osd_mclock_profile", recoveryOption}
 
-	exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, false, true)
+	_, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", cephArgs, operatorNamespace, storageClusterNamespace, false)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to run ceph command with args %v. %v", cephArgs, err))
+	}
 }
 
 type SafeToDestroyStatus struct {
@@ -46,10 +52,13 @@ type SafeToDestroyStatus struct {
 
 func SafeToDestroy(ctx context.Context, clientsets *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace, osdID string) (bool, error) {
 	args := []string{"osd", "safe-to-destroy", osdID}
-	out := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", args, operatorNamespace, storageClusterNamespace, true, false)
+	out, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", args, operatorNamespace, storageClusterNamespace, true)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to run ceph command with args %v. %v", args, err))
+	}
 
 	var safeToDestroy SafeToDestroyStatus
-	if err := json.Unmarshal([]byte(out), &safeToDestroy); err != nil {
+	if err = json.Unmarshal([]byte(out), &safeToDestroy); err != nil {
 		return false, errors.Wrapf(err, string(out))
 	}
 	if len(safeToDestroy.SafeToDestroy) != 0 && fmt.Sprint(safeToDestroy.SafeToDestroy[0]) == osdID {

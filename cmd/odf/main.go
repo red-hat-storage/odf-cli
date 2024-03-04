@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
+	"github.com/red-hat-storage/odf-cli/cmd/odf/mon"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/purgeosd"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/set"
@@ -23,5 +24,6 @@ func addcommands() {
 		get.GetCmd,
 		purgeosd.CephPurgeOsdCmd,
 		subvolume.SubvolumeCmd,
+		mon.MonsCmd,
 	)
 }

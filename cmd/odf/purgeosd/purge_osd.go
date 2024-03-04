@@ -33,7 +33,7 @@ var CephPurgeOsdCmd = &cobra.Command{
 			logging.Warning("Are you sure you want to purge osd.%s? The OSD is *not* safe to destroy. This may lead to data loss. If you are sure the OSD should be purged, enter '%s'", osdID, yesForceDestroyOSD)
 			fmt.Scanf("%s", &answer)
 
-			err := mons.PromptToContinueOrCancel("osd-purge", yesForceDestroyOSD, answer)
+			err := mons.PromptToContinueOrCancel(yesForceDestroyOSD, answer)
 			if err != nil {
 				logging.Fatal(err)
 			}
