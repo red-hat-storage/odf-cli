@@ -23,6 +23,7 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf operator`:
   - `rook`:
     - `set`: Set the property in the rook-ceph-operator-config configmap.
+    - `restart` : Restart the Rook-Ceph operator
 - `odf help` : Display help text
 
 ## Documentation

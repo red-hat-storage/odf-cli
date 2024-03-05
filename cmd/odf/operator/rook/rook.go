@@ -13,4 +13,5 @@ var RookCmd = &cobra.Command{
 
 func init() {
 	RookCmd.AddCommand(setCmd)
+	RookCmd.AddCommand(restartCmd)
 }
