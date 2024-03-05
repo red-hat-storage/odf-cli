@@ -11,11 +11,16 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `recovery-profile`: Get the recovery profile value.
   - `health`: Check health of the cluster and common configuration issues.
 - `odf purge-osd <ID>`: Permanently remove an OSD from the cluster.
-- `odf help` : Display help text
-- `odf subvolume ls`: Display all the subvolumes
-- `odf subvolume delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
+- `odf maintenance`: [Perform maintenance operations](docs/maintenance.md) on mons or OSDs. The mon or OSD deployment will be scaled down and replaced temporarily by a maintenance deployment.
+  - `start <deployment-name>`
+    - `[--alternate-image <alternate-image>]` : (optional) Start a maintenance deployment with an optional alternative ceph container image
+  - `stop <deployment-name>`: Stop the maintenance deployment and restore the mon or OSD deployment
+- `odf subvolume`:
+  - `ls`: Display all the subvolumes
+  - `delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
 - `odf mons`
   - `restore-quorum <monID>`: Restore the mon quorum based on a single healthy mon since quorum was lost with the other mons
+- `odf help` : Display help text
 
 ## Documentation
 
@@ -25,6 +30,7 @@ Visit docs below for complete details about each command and their flags uses.
 - [get](docs/get.md)
 - [purge-osd](docs/purge_osd.md)
 - [mon](docs/mons.md)
+- [maintenance](docs/maintenance.md)
 
 ### Root args
 
