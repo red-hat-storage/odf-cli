@@ -20,6 +20,10 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
 - `odf mons`
   - `restore-quorum <monID>`: Restore the mon quorum based on a single healthy mon since quorum was lost with the other mons
+- `odf operator`:
+  - `rook`:
+    - `set`: Set the property in the rook-ceph-operator-config configmap.
+    - `restart` : Restart the Rook-Ceph operator
 - `odf help` : Display help text
 
 ## Documentation
@@ -31,6 +35,7 @@ Visit docs below for complete details about each command and their flags uses.
 - [purge-osd](docs/purge_osd.md)
 - [mon](docs/mons.md)
 - [maintenance](docs/maintenance.md)
+- [operator](docs/operator.md)
 
 ### Root args
 
