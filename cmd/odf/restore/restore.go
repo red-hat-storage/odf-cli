@@ -13,4 +13,5 @@ var RestoreCrd = &cobra.Command{
 
 func init() {
 	RestoreCrd.AddCommand(deletedCmd)
+	RestoreCrd.AddCommand(monQuorumCmd)
 }
