@@ -4,6 +4,7 @@ The get command supports the following sub-commands:
 
 * [recovery-profile](#recovery-profile)
 * [health](#health)
+* [dr-health](#dr-health)
 
 ## recovery-profile
 
@@ -87,4 +88,46 @@ Info:   PgState: active+clean, PgCount: 113
 
 Info: Checking if at least one mgr pod is running
 rook-ceph-mgr-a-54f7dbddcd-h7j7m        Running openshift-storage       ip-10-0-64-239.us-west-1.compute.internal
+```
+
+## dr-health
+
+The DR health command is used to get the connection status of one cluster from another cluster in mirroring-enabled clusters. The cephblockpool is queried with mirroring-enabled and If not found will exit with relevant logs. Optionally, args can be passed to be appended to ceph status, for example: --debug-ms 1.
+
+```bash
+$ odf get dr-health
+
+Info: fetching the cephblockpools with mirroring enabled
+Info: found "ocs-storagecluster-cephblockpool" cephblockpool with mirroring enabled
+Info: running ceph status from peer cluster
+Info:   cluster:
+    id:     9a2e7e55-40e1-4a79-9bfa-c3e4750c6b0f
+    health: HEALTH_OK
+
+  services:
+    mon:        3 daemons, quorum a,b,c (age 2w)
+    mgr:        a(active, since 2w), standbys: b
+    mds:        1/1 daemons up, 1 hot standby
+    osd:        3 osds: 3 up (since 2w), 3 in (since 2w)
+    rbd-mirror: 1 daemon active (1 hosts)
+    rgw:        1 daemon active (1 hosts, 1 zones)
+
+  data:
+    volumes: 1/1 healthy
+    pools:   12 pools, 185 pgs
+    objects: 1.25k objects, 2.5 GiB
+    usage:   9.9 GiB used, 290 GiB / 300 GiB avail
+    pgs:     185 active+clean
+
+  io:
+    client:   18 KiB/s rd, 86 KiB/s wr, 22 op/s rd, 9 op/s wr
+
+
+Info: running mirroring daemon health
+health: WARNING
+daemon health: OK
+image health: WARNING
+images: 4 total
+    2 unknown
+    2 replaying
 ```
