@@ -5,6 +5,7 @@ The get command supports the following sub-commands:
 * [recovery-profile](#recovery-profile)
 * [health](#health)
 * [dr-health](#dr-health)
+* [mon-endpoints](#mon-endpoints)
 
 ## recovery-profile
 
@@ -130,4 +131,14 @@ image health: WARNING
 images: 4 total
     2 unknown
     2 replaying
+```
+
+## mon-endpoints
+
+Prints the mon endpoints
+
+```bash
+$ odf get mon-endpoints
+
+10.98.95.196:6789,10.106.118.240:6789,10.111.18.121:6789
 ```
