@@ -16,4 +16,5 @@ func init() {
 	GetCmd.AddCommand(getRecoveryProfile)
 	GetCmd.AddCommand(rookCmd)
 	GetCmd.AddCommand(clusterHealth)
+	GetCmd.AddCommand(drHealthCmd)
 }
