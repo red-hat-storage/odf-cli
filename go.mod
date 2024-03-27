@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/rook/kubectl-rook-ceph v0.8.1-0.20240326101210-6d67a4d47c41
+	github.com/rook/kubectl-rook-ceph v0.8.1-0.20240327033245-3f07e9fd3059
 	github.com/rook/rook v1.13.7
 	github.com/spf13/cobra v1.8.0
 	k8s.io/apimachinery v0.29.3
