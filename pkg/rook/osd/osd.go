@@ -54,7 +54,7 @@ func SafeToDestroy(ctx context.Context, clientsets *k8sutil.Clientsets, operator
 	args := []string{"osd", "safe-to-destroy", osdID}
 	out, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", args, operatorNamespace, storageClusterNamespace, true)
 	if err != nil {
-		logging.Fatal(fmt.Errorf("failed to run ceph command with args %v. %v", args, err))
+		return false, errors.Wrapf(err, string(out))
 	}
 
 	var safeToDestroy SafeToDestroyStatus
