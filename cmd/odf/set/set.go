@@ -14,4 +14,7 @@ var SetCmd = &cobra.Command{
 func init() {
 	SetCmd.AddCommand(setRecoveryProfile)
 	SetCmd.AddCommand(cephCmd)
+	SetCmd.AddCommand(osdFullRatioCmd)
+	SetCmd.AddCommand(osdBackFillFullRatioCmd)
+	SetCmd.AddCommand(osdNearFullRatioCmd)
 }
