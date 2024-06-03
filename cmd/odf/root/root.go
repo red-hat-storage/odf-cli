@@ -4,14 +4,17 @@ import (
 	"context"
 	"fmt"
 
+	ocsv1 "github.com/red-hat-storage/ocs-operator/api/v4/v1"
 	"github.com/rook/kubectl-rook-ceph/pkg/k8sutil"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
 	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
 	"github.com/spf13/cobra"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/dynamic"
 	k8s "k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 var (
@@ -20,6 +23,8 @@ var (
 	OperatorNamespace       string
 	StorageClusterNamespace string
 	ClientSets              *k8sutil.Clientsets
+	CtrlClient              ctrl.Client
+	scheme                  = runtime.NewScheme()
 )
 
 // RootCmd represents the odf command
@@ -32,6 +37,7 @@ var RootCmd = &cobra.Command{
 			OperatorNamespace = StorageClusterNamespace
 		}
 		ClientSets = getClientsets(cmd.Context())
+		CtrlClient = getControllerRuntimeClient()
 	},
 }
 
@@ -42,6 +48,10 @@ func Execute() {
 }
 
 func init() {
+	if err := ocsv1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
+
 	// Hide autocompletion command
 	RootCmd.CompletionOptions.DisableDefaultCmd = true
 
@@ -90,6 +100,16 @@ func getClientsets(ctx context.Context) *k8sutil.Clientsets {
 	preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
 
 	return clientsets
+}
+
+func getControllerRuntimeClient() ctrl.Client {
+	client, err := ctrl.New(ClientSets.KubeConfig, ctrl.Options{
+		Scheme: scheme,
+	})
+	if err != nil {
+		logging.Fatal(err)
+	}
+	return client
 }
 
 func preValidationCheck(ctx context.Context, k8sclientset *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace string) {
