@@ -9,6 +9,8 @@ import (
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
 	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
 	"github.com/spf13/cobra"
+	submarinerv1alpha1 "github.com/submariner-io/submariner-operator/api/v1alpha1"
+	submarinerv1 "github.com/submariner-io/submariner/pkg/apis/submariner.io/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/dynamic"
@@ -49,6 +51,12 @@ func Execute() {
 
 func init() {
 	if err := ocsv1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
+	if err := submarinerv1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
+	if err := submarinerv1alpha1.AddToScheme(scheme); err != nil {
 		logging.Fatal(err)
 	}
 

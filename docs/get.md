@@ -5,6 +5,7 @@ The get command supports the following sub-commands:
 * [recovery-profile](#recovery-profile)
 * [health](#health)
 * [dr-health](#dr-health)
+* [dr-prereq](#dr-prereq)
 * [mon-endpoints](#mon-endpoints)
 
 ## recovery-profile
@@ -131,6 +132,18 @@ image health: WARNING
 images: 4 total
     2 unknown
     2 replaying
+```
+
+## dr-prereq
+
+This command is used to get the status of all the pre-requisites for enabling Disaster Recovery on a pair of clusters. It takes a peer cluster as argument and uses it to compare current cluster configruation with peer cluster configuration. Based on the results, it will show status of all the pre-requisites.
+
+```bash
+$ odf get dr-prereq peer-cluster-1
+
+Info: Submariner is installed.
+Info: Globalnet is required.
+Info: Globalnet is enabled.
 ```
 
 ## mon-endpoints
