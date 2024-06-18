@@ -4,9 +4,9 @@ go 1.21
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/rook/kubectl-rook-ceph v0.9.0
-	github.com/rook/rook v1.14.5
-	github.com/spf13/cobra v1.8.0
+	github.com/rook/kubectl-rook-ceph v0.9.1
+	github.com/rook/rook v1.14.6
+	github.com/spf13/cobra v1.8.1
 	k8s.io/apimachinery v0.29.3
 	k8s.io/client-go v0.29.3
 )
@@ -16,7 +16,7 @@ require (
 	github.com/containernetworking/cni v1.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/emicklei/go-restful/v3 v3.12.0 // indirect
-	github.com/fatih/color v1.16.0 // indirect
+	github.com/fatih/color v1.17.0 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
@@ -47,7 +47,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.6.0 // indirect
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20221122204822-d1a8c34382f1 // indirect
-	github.com/libopenstorage/secrets v0.0.0-20231011182615-5f4b25ceede1 // indirect
+	github.com/libopenstorage/secrets v0.0.0-20240416031220-a17cf7f72c6c // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
@@ -63,12 +63,12 @@ require (
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/net v0.23.0 // indirect
+	golang.org/x/crypto v0.24.0 // indirect
+	golang.org/x/net v0.26.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
-	golang.org/x/term v0.18.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
+	golang.org/x/term v0.21.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
