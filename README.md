@@ -15,6 +15,7 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `recovery-profile`: Get the recovery profile value.
   - `health`: Check health of the cluster and common configuration issues.
   - `dr-health [ceph status args]`: Print the ceph status of a peer cluster in a mirroring-enabled environment thereby validating connectivity between ceph clusters. Ceph status args can be optionally passed, such as to change the log level: --debug-ms 1.
+  - `dr-prereq <PeerManagedClusterName>` : Print the status of pre-requisites for Disaster Recovery between peer clusters.
   - `mon-endpoints`: Print mon endpoints.
 - `odf purge-osd <ID>`: Permanently remove an OSD from the cluster.
 - `odf maintenance`: [Perform maintenance operations](docs/maintenance.md) on mons or OSDs. The mon or OSD deployment will be scaled down and replaced temporarily by a maintenance deployment.
