@@ -8,7 +8,6 @@ import (
 var RestoreCrd = &cobra.Command{
 	Use:                "restore",
 	DisableFlagParsing: true,
-	Hidden:             true,
 }
 
 func init() {
