@@ -7,10 +7,9 @@ import (
 
 // OperatorCmd represents the rook commands
 var OperatorCmd = &cobra.Command{
-	Use:    "operator",
-	Short:  "Calls subcommands specific to various ODF operators",
-	Args:   cobra.ExactArgs(1),
-	Hidden: true,
+	Use:   "operator",
+	Short: "Calls subcommands specific to various ODF operators",
+	Args:  cobra.ExactArgs(1),
 }
 
 func init() {
