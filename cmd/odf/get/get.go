@@ -17,5 +17,6 @@ func init() {
 	GetCmd.AddCommand(rookCmd)
 	GetCmd.AddCommand(clusterHealth)
 	GetCmd.AddCommand(drHealthCmd)
+	GetCmd.AddCommand(drPrereqCmd)
 	GetCmd.AddCommand(monEndpoints)
 }
