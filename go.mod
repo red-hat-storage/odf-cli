@@ -1,6 +1,6 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.21
+go 1.22.0
 
 require (
 	github.com/pkg/errors v0.9.1
@@ -12,9 +12,9 @@ require (
 	github.com/submariner-io/submariner v0.17.1
 	github.com/submariner-io/submariner-operator v0.17.1
 	golang.org/x/net v0.26.0
-	k8s.io/api v0.29.3
-	k8s.io/apimachinery v0.29.3
-	k8s.io/client-go v0.29.3
+	k8s.io/api v0.30.2
+	k8s.io/apimachinery v0.30.2
+	k8s.io/client-go v0.30.2
 	sigs.k8s.io/controller-runtime v0.17.2
 )
 
