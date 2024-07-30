@@ -79,7 +79,7 @@ These are the arguments that apply to all commands:
 
 #### Requirements
 
-- Go >= 1.21
+- Go >= 1.22.0
 - ODF storage cluster should be installed.
 
 ### Build and Run
