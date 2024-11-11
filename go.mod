@@ -13,7 +13,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/submariner-io/submariner v0.18.1
 	github.com/submariner-io/submariner-operator v0.18.1
-	golang.org/x/net v0.30.0
+	golang.org/x/net v0.31.0
 	k8s.io/api v0.31.1
 	k8s.io/apimachinery v0.31.1
 	k8s.io/client-go v0.31.1
@@ -82,11 +82,11 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/submariner-io/admiral v0.18.1 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
+	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
-	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/term v0.25.0 // indirect
-	golang.org/x/text v0.19.0 // indirect
+	golang.org/x/sys v0.27.0 // indirect
+	golang.org/x/term v0.26.0 // indirect
+	golang.org/x/text v0.20.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.23.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
