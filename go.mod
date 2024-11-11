@@ -8,11 +8,11 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.2
-	github.com/rook/rook v1.15.4
+	github.com/rook/rook v1.15.5
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.9.0
-	github.com/submariner-io/submariner v0.18.1
-	github.com/submariner-io/submariner-operator v0.18.1
+	github.com/submariner-io/submariner v0.19.0
+	github.com/submariner-io/submariner-operator v0.19.0
 	golang.org/x/net v0.31.0
 	k8s.io/api v0.31.1
 	k8s.io/apimachinery v0.31.1
@@ -80,22 +80,21 @@ require (
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/submariner-io/admiral v0.18.1 // indirect
+	github.com/submariner-io/admiral v0.19.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/term v0.26.0 // indirect
 	golang.org/x/text v0.20.0 // indirect
-	golang.org/x/time v0.5.0 // indirect
-	golang.org/x/tools v0.23.0 // indirect
+	golang.org/x/time v0.6.0 // indirect
 	google.golang.org/protobuf v1.34.2 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
-	k8s.io/kube-openapi v0.0.0-20240620174524-b456828f718b // indirect
+	k8s.io/kube-openapi v0.0.0-20240808142205-8e686545bdb8 // indirect
 	k8s.io/utils v0.0.0-20240711033017-18e509b52bc8 // indirect
 	sigs.k8s.io/container-object-storage-interface-api v0.1.0 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
