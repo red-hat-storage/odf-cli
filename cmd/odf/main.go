@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/red-hat-storage/odf-cli/cmd/odf/ceph"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/maintenance"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/operator"
@@ -29,5 +30,9 @@ func addcommands() {
 		maintenance.MaintenanceCmd,
 		operator.OperatorCmd,
 		restore.RestoreCrd,
+		ceph.CephCmd,
+		ceph.RadosgwCmd,
+		ceph.RbdCmd,
+		ceph.RadosCmd,
 	)
 }

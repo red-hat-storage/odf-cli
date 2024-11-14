@@ -32,6 +32,10 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf restore`:
   - `mon-quorum`: Restore the mon quorum based on a single healthy mon since quorum was lost with the other mons
   - `deleted`: Restore the ceph resources which are stuck in deleting state due to underlying resources being present in the cluster
+- `odf ceph <args>` : Run a Ceph CLI command. Supports any arguments the ceph command supports. See [Ceph](https://docs.ceph.com/en/pacific/start/intro/) docs for more.
+- `odf rados <args>` : Run a Rados CLI command. Supports any arguments the rados command supports. See [Rados](https://docs.ceph.com/en/latest/man/8/rados/) docs for more.
+- `odf radosgw-admin <args>` : Run an RGW CLI command. Supports any arguments the [radosgw-admin](https://docs.ceph.com/en/latest/man/8/radosgw-admin/) command supports. See the radosgw-admin docs for more.
+- `odf rbd <args>` : Call a 'rbd' CLI command with arbitrary args
 - `odf help` : Display help text
 
 ## Documentation
@@ -44,6 +48,10 @@ Visit docs below for complete details about each command and their flags uses.
 - [mon](docs/mons.md)
 - [maintenance](docs/maintenance.md)
 - [operator](docs/operator.md)
+- [ceph](docs/ceph.md)
+- [rbd](docs/ceph.md#rbd)
+- [rados](docs/ceph.md#rados)
+- [radosgw-admin](docs/ceph.md#radosgw-admin)
 
 ### Root args
 
