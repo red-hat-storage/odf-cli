@@ -8,9 +8,9 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.2
-	github.com/rook/rook v1.15.5
+	github.com/rook/rook v1.15.6
 	github.com/spf13/cobra v1.8.1
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.19.0
 	github.com/submariner-io/submariner-operator v0.19.0
 	golang.org/x/net v0.31.0
