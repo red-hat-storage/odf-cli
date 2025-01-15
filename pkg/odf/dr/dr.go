@@ -44,6 +44,8 @@ func GetDRPrerequisite(ctx context.Context, peerClusterID string) {
 	globalnetEnabled := isGlobalnetEnabled(submarinerCR)
 	if globalnetEnabled {
 		logging.Info("Globalnet is enabled.")
+	} else if !globalnetEnabled && globalnetRequired {
+		logging.Warning("Globalnet is not enabled, but is required.")
 	} else {
 		logging.Info("Globalnet is not enabled.")
 	}
