@@ -8,11 +8,11 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.3
-	github.com/rook/rook v1.16.1
+	github.com/rook/rook v1.16.2
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
-	github.com/submariner-io/submariner v0.19.1
-	github.com/submariner-io/submariner-operator v0.19.1
+	github.com/submariner-io/submariner v0.19.2
+	github.com/submariner-io/submariner-operator v0.19.2
 	golang.org/x/net v0.34.0
 	k8s.io/api v0.32.0
 	k8s.io/apimachinery v0.32.0
@@ -78,7 +78,7 @@ require (
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/submariner-io/admiral v0.19.1 // indirect
+	github.com/submariner-io/admiral v0.19.2 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/oauth2 v0.24.0 // indirect
