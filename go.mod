@@ -7,7 +7,7 @@ toolchain go1.23.4
 require (
 	github.com/pkg/errors v0.9.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
-	github.com/rook/kubectl-rook-ceph v0.9.3
+	github.com/rook/kubectl-rook-ceph v0.9.4-0.20250210085144-07748065a279
 	github.com/rook/rook v1.16.3
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
