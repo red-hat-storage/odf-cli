@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/red-hat-storage/odf-cli/cmd/odf/benchmark"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/ceph"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/dr"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
@@ -36,5 +37,6 @@ func addcommands() {
 		ceph.RbdCmd,
 		ceph.RadosCmd,
 		dr.DrCmd,
+		benchmark.BenchmarkCmd,
 	)
 }
