@@ -36,6 +36,11 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf rados <args>` : Run a Rados CLI command. Supports any arguments the rados command supports. See [Rados](https://docs.ceph.com/en/latest/man/8/rados/) docs for more.
 - `odf radosgw-admin <args>` : Run an RGW CLI command. Supports any arguments the [radosgw-admin](https://docs.ceph.com/en/latest/man/8/radosgw-admin/) command supports. See the radosgw-admin docs for more.
 - `odf rbd <args>` : Call a 'rbd' CLI command with arbitrary args
+- `odf dr`:
+  - `init`: Create configuration file for `odf dr` sub-commands.
+  - `test`:
+    - `run`: Run distaster recovery test with a tiny application.
+    - `clean`: Clean up after running tests.
 - `odf help` : Display help text
 
 ## Documentation
@@ -52,6 +57,7 @@ Visit docs below for complete details about each command and their flags uses.
 - [rbd](docs/ceph.md#rbd)
 - [rados](docs/ceph.md#rados)
 - [radosgw-admin](docs/ceph.md#radosgw-admin)
+- [dr](docs/dr.md)
 
 ### Root args
 
