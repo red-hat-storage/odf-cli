@@ -2,7 +2,7 @@ module github.com/red-hat-storage/odf-cli
 
 go 1.23.0
 
-toolchain go1.23.4
+toolchain go1.24.1
 
 require (
 	github.com/pkg/errors v0.9.1
@@ -13,7 +13,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.0
 	github.com/submariner-io/submariner-operator v0.20.0
-	golang.org/x/net v0.37.0
+	golang.org/x/net v0.38.0
 	k8s.io/api v0.32.2
 	k8s.io/apimachinery v0.32.2
 	k8s.io/client-go v0.32.2
