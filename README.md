@@ -89,14 +89,7 @@ These are the arguments that apply to all commands:
 
 ## Installation
 
-### Build from source
-
-#### Requirements
-
-- Go >= 1.22.0
-- ODF storage cluster should be installed.
-
-### Build and Run
+### Build and run from source
 
 1. Clone the repository
 
@@ -107,10 +100,11 @@ These are the arguments that apply to all commands:
 2. Change the directory and build the binary
 
     ```bash
-    cd odf-cli/ && make build
+    cd odf-cli/
+    make
     ```
 
-3. Use the binary present in the`/bin/` directory to run the commands
+3. Use the binary present in the `bin/` directory to run the commands
 
     ```bash
     ./bin/odf -h
