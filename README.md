@@ -93,7 +93,7 @@ These are the arguments that apply to all commands:
 
 #### Requirements
 
-- Go >= 1.22.0
+- Go >= 1.23.0
 - ODF storage cluster should be installed.
 
 ### Build and Run
@@ -107,7 +107,8 @@ These are the arguments that apply to all commands:
 2. Change the directory and build the binary
 
     ```bash
-    cd odf-cli/ && make build
+    cd odf-cli/
+    make
     ```
 
 3. Use the binary present in the`/bin/` directory to run the commands
