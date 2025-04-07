@@ -14,7 +14,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.0
 	github.com/submariner-io/submariner-operator v0.20.0
-	golang.org/x/net v0.37.0
+	golang.org/x/net v0.38.0
 	k8s.io/api v0.32.3
 	k8s.io/apimachinery v0.32.3
 	k8s.io/client-go v0.32.3
