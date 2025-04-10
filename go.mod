@@ -8,7 +8,7 @@ require (
 	github.com/rook/kubectl-rook-ceph v0.9.1
 	github.com/rook/rook v1.14.9
 	github.com/spf13/cobra v1.8.1
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.18.0
 	github.com/submariner-io/submariner-operator v0.18.0
 	golang.org/x/net v0.34.0
@@ -27,7 +27,7 @@ require (
 	github.com/evanphx/json-patch v5.9.0+incompatible // indirect
 	github.com/evanphx/json-patch/v5 v5.9.0 // indirect
 	github.com/fatih/color v1.17.0 // indirect
-	github.com/go-jose/go-jose/v4 v4.0.1 // indirect
+	github.com/go-jose/go-jose/v4 v4.0.5 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
