@@ -731,8 +731,8 @@ github.com/ramendr/ramen/api v0.0.0-20250313143647-8dd671566929 h1:yW5QWX4InhtZJ
 github.com/ramendr/ramen/api v0.0.0-20250313143647-8dd671566929/go.mod h1:ZRq9Ep/AMWPB9U8bi2mxmcU5nYnmfuK5OY2NVwj4xdA=
 github.com/ramendr/ramen/e2e v0.0.0-20250404093316-3bc6c2453c1d h1:MVW5GO88K8e6D+gsiEIfIn7WjVS+z3RDEDpEnxLLKRc=
 github.com/ramendr/ramen/e2e v0.0.0-20250404093316-3bc6c2453c1d/go.mod h1:fPaZRvx6wnY2HvOzrMgXiZVgRX4DaINvmTqgnP8Ppvs=
-github.com/ramendr/ramenctl v0.3.4 h1:YbT8Egkz/2QAShK1dYPaCDCBlfeZpvCNj/LlTQDRzGU=
-github.com/ramendr/ramenctl v0.3.4/go.mod h1:zFBynKLXRnTLZ/yjLAmdYCrxfF2BrA9+/vTE0bAz8is=
+github.com/ramendr/ramenctl v0.3.5 h1:uLx8oegVDQfi03yW1F7BQr0bLN0ktoWqkvW3xDM0mh0=
+github.com/ramendr/ramenctl v0.3.5/go.mod h1:zFBynKLXRnTLZ/yjLAmdYCrxfF2BrA9+/vTE0bAz8is=
 github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d h1:/AnA3CccDrZZfgaJSKIWMZOznzq2k5W9CXmj4Vyhxik=
 github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d/go.mod h1:kbtILVV15bhm4UFehDYhezjZIvbeaZQ/4vQdv2gagdk=
 github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod h1:XWv6SoW27p1b0cqNHllgS5HIMJraePCO15w5zCzIWYg=
