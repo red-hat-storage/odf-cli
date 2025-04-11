@@ -38,7 +38,7 @@ var RootCmd = &cobra.Command{
 		if StorageClusterNamespace != "" && OperatorNamespace == "" {
 			OperatorNamespace = StorageClusterNamespace
 		}
-		ClientSets = getClientsets(cmd.Context())
+		ClientSets = getClientsets(cmd)
 		CtrlClient = getControllerRuntimeClient()
 	},
 }
@@ -69,9 +69,14 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&KubeContext, "context", "", "Openshift context to use")
 }
 
-func getClientsets(ctx context.Context) *k8sutil.Clientsets {
-	var err error
+func isBenchmarkCommand(cmd *cobra.Command) bool {
+	// Check if the command itself is "benchmark" or if its parent is "benchmark"
+	return cmd.Use == "benchmark" || (cmd.Parent() != nil && cmd.Parent().Use == "benchmark")
+}
 
+func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
+	var err error
+	ctx := cmd.Context()
 	clientsets := &k8sutil.Clientsets{}
 
 	congfigOverride := &clientcmd.ConfigOverrides{}
@@ -104,8 +109,9 @@ func getClientsets(ctx context.Context) *k8sutil.Clientsets {
 	if err != nil {
 		logging.Fatal(err)
 	}
-
-	preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
+	if !isBenchmarkCommand(cmd) {
+		preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
+	}
 
 	return clientsets
 }
