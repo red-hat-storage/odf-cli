@@ -6,10 +6,10 @@ toolchain go1.23.7
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.3.5
+	github.com/ramendr/ramenctl v0.4.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.3
-	github.com/rook/rook v1.16.5
+	github.com/rook/rook v1.17.0
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.0
@@ -41,7 +41,7 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.6.9 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
@@ -54,13 +54,13 @@ require (
 	github.com/hashicorp/go-secure-stdlib/strutil v0.1.2 // indirect
 	github.com/hashicorp/go-sockaddr v1.0.7 // indirect
 	github.com/hashicorp/hcl v1.0.1-vault-7 // indirect
-	github.com/hashicorp/vault/api v1.15.0 // indirect
+	github.com/hashicorp/vault/api v1.16.0 // indirect
 	github.com/hashicorp/vault/api/auth/approle v0.8.0 // indirect
 	github.com/hashicorp/vault/api/auth/kubernetes v0.8.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.7.5 // indirect
+	github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.7.6 // indirect
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20221122204822-d1a8c34382f1 // indirect
 	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.2.0 // indirect
 	github.com/libopenstorage/secrets v0.0.0-20240416031220-a17cf7f72c6c // indirect
@@ -107,13 +107,13 @@ require (
 	golang.org/x/term v0.31.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
-	google.golang.org/protobuf v1.36.1 // indirect
+	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/cli-runtime v0.32.0 // indirect
+	k8s.io/cli-runtime v0.32.3 // indirect
 	k8s.io/component-base v0.32.2 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20241212222426-2c72e554b1e7 // indirect
@@ -124,7 +124,7 @@ require (
 	open-cluster-management.io/multicloud-operators-subscription v0.15.0 // indirect
 	sigs.k8s.io/container-object-storage-interface-api v0.1.0 // indirect
 	sigs.k8s.io/json v0.0.0-20241014173422-cfa47c3a1cc8 // indirect
-	sigs.k8s.io/structured-merge-diff/v4 v4.5.0 // indirect
+	sigs.k8s.io/structured-merge-diff/v4 v4.6.0 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
