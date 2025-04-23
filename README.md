@@ -109,3 +109,15 @@ These are the arguments that apply to all commands:
     ```bash
     ./bin/odf -h
     ```
+
+### Download nightly build
+
+If you want to test the latest nightly build you can use the
+download-odf-nightly.sh script:
+
+```bash
+scripts/download-odf-nightly.sh v4.19
+```
+
+The command downloads the latest 4.19 build image and extracts the odf
+executable to the current directory.
