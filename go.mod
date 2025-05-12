@@ -6,10 +6,10 @@ toolchain go1.23.7
 
 require (
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.4.0
+	github.com/ramendr/ramenctl v0.5.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
-	github.com/rook/kubectl-rook-ceph v0.9.3
-	github.com/rook/rook v1.17.1
+	github.com/rook/kubectl-rook-ceph v0.9.4
+	github.com/rook/rook v1.17.2
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.0
@@ -84,7 +84,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/ramendr/ramen/api v0.0.0-20250313143647-8dd671566929 // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20250404093316-3bc6c2453c1d // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20250424122329-3f0bedcd598d // indirect
 	github.com/rook/rook/pkg/apis v0.0.0-20241216163035-3170ac6a0c58 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
@@ -103,6 +103,7 @@ require (
 	golang.org/x/crypto v0.38.0 // indirect
 	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
+	golang.org/x/sync v0.14.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/term v0.32.0 // indirect
 	golang.org/x/text v0.25.0 // indirect
