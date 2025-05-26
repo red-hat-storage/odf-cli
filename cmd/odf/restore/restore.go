@@ -8,6 +8,7 @@ import (
 var RestoreCrd = &cobra.Command{
 	Use:                "restore",
 	DisableFlagParsing: true,
+	Short:              "Restore deleted ODF custom resources (CRs)",
 }
 
 func init() {
