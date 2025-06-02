@@ -41,6 +41,7 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `test`:
     - `run`: Run distaster recovery test with a tiny application.
     - `clean`: Clean up after running tests.
+- `odf noobaa:` Run a noobaa CLI command. Supports all the noobaa cli arguments available in odf.
 - `odf help` : Display help text
 
 ## Documentation
