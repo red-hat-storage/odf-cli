@@ -1516,12 +1516,6 @@ github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMn
 github.com/chzyer/test v0.0.0-20210722231415-061457976a23/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
 github.com/chzyer/test v1.0.0/go.mod h1:2JlltgoNkt4TW/z9V/IzDdFaMTM2JPIi26O1pF38GC8=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
-github.com/cloudnative-pg/barman-cloud v0.0.0-20241218093921-134c7de4954a h1:VrEa9P/HfA6csNOh0DRlUyeUoKuByV57tLnf2rTIqfU=
-github.com/cloudnative-pg/barman-cloud v0.0.0-20241218093921-134c7de4954a/go.mod h1:HPGwXHlatQEnb2HdsbGTZLEo8qlxKLdxTHiTeF9TTqw=
-github.com/cloudnative-pg/cloudnative-pg v1.25.0 h1:VWqj9Hfme4rIdTZm9/SLQN97WMTXPMvZRqEs2n3tIec=
-github.com/cloudnative-pg/cloudnative-pg v1.25.0/go.mod h1:f+KfcxV2nam1S6oEMZruVBj340pWQrqrhLQVvzbtpdA=
-github.com/cloudnative-pg/machinery v0.0.0-20241219102532-2807bc88310d h1:v9IgiRYa7r+KCUxl5lCyUXdhsefZ90engPSMNLBqYmc=
-github.com/cloudnative-pg/machinery v0.0.0-20241219102532-2807bc88310d/go.mod h1:uBHGRIk5rt07mO4zjIC1uvGBWTH6PqIiD1PfpvPGZKU=
 github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGXZJjfX53e64911xZQV5JYwmTeXPW+k8Sc=
 github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
 github.com/cncf/udpa/go v0.0.0-20201120205902-5459f2c99403/go.mod h1:WmhPx2Nbnhtbo57+VJT5O0JRkEi1Wbu0z5j0R8u5Hbk=
@@ -2226,8 +2220,8 @@ github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uY
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/nirs/kubectl-gather v0.7.0 h1:dSFDmR6mGeeU4RYPZIlXNmDuxGti7HLrBqOa1T5E3lg=
 github.com/nirs/kubectl-gather v0.7.0/go.mod h1:soHaIv4n5b1IHO+2GInaYkb3ZKFu49C0TOePMgzHXAI=
-github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5 h1:7J/qAbYhZx9Js51wfnY4zvfmiPu4AD7rtleu0ULfwUs=
-github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5/go.mod h1:w3/B2Z/MMTW9TT2bsiN7VMlwfTwQL4KVARr0r7WKEvk=
+github.com/noobaa/noobaa-operator/v5 v5.18.4 h1:9esZH62Q4t9RFvi9xLgMBAVrN8u9Ym4mmFl6MHz4U5g=
+github.com/noobaa/noobaa-operator/v5 v5.18.4/go.mod h1:CJ6W5cZRBDxeOb+sCCNqtcgia9wLzNRR1HQspPJ/E0I=
 github.com/nxadm/tail v1.4.4/go.mod h1:kenIhsEOeOJmVchQTgglprH7qJGnHDVpk1VPCcaMI8A=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=
 github.com/nxadm/tail v1.4.8/go.mod h1:+ncqLTQzXmGhMZNUePPaPqPvBxHAIsmXswZKocGu+AU=
@@ -2415,8 +2409,6 @@ github.com/redis/go-redis/v9 v9.6.1 h1:HHDteefn6ZkTtY5fGUE8tj8uy85AHk6zP7CpzIAM0
 github.com/redis/go-redis/v9 v9.6.1/go.mod h1:0C0c6ycQsdpVNQpxb1njEQIqkx5UcsM8FJCQLgE9+RA=
 github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
-github.com/robfig/cron v1.2.0 h1:ZjScXvvxeQ63Dbyxy76Fj3AT3Ut0aKsyd2/tl3DTMuQ=
-github.com/robfig/cron v1.2.0/go.mod h1:JGuDeoQd7Z6yL4zQhZ3OPEVHB7fL6Ka6skscFHfmt2k=
 github.com/robfig/cron/v3 v3.0.1 h1:WdRxkvbJztn8LMz/QEvLN5sBU+xKpSqwwUO1Pjr4qDs=
 github.com/robfig/cron/v3 v3.0.1/go.mod h1:eQICP3HwyT7UooqI/z+Ov+PtYAWygg1TEWWzGIFLtro=
 github.com/rogpeppe/fastuuid v0.0.0-20150106093220-6724a57986af/go.mod h1:XWv6SoW27p1b0cqNHllgS5HIMJraePCO15w5zCzIWYg=
@@ -2432,8 +2424,8 @@ github.com/rogpeppe/go-internal v1.13.1 h1:KvO1DLK/DRN07sQ1LQKScxyZJuNnedQ5/wKSR
 github.com/rogpeppe/go-internal v1.13.1/go.mod h1:uMEvuHeurkdAXX61udpOXGD/AzZDWNMNyH2VO9fmH0o=
 github.com/rook/kubectl-rook-ceph v0.9.4 h1:RgBr/nkgSMcNHE0zi4w3KDaQqGWCtsdI5L2Pa17JXYg=
 github.com/rook/kubectl-rook-ceph v0.9.4/go.mod h1:UvOPYgfA3+ulKE2omD+A6g82hst24jwO4gY9JIZqfu8=
-github.com/rook/rook v1.17.3 h1:EyYVEVnGqMtTZnvQYGMD6I1MvNqvUBnVytoq/8PI+EM=
-github.com/rook/rook v1.17.3/go.mod h1:Z5nuT7cGJLek9nRDH92J3XTcdqGMIyGDsFYo/O3NuT0=
+github.com/rook/rook v1.17.4 h1:b9BkF3kls/HfpUtuVBbRYD2bAT0F94Wq6EejSBgkeQQ=
+github.com/rook/rook v1.17.4/go.mod h1:Z5nuT7cGJLek9nRDH92J3XTcdqGMIyGDsFYo/O3NuT0=
 github.com/rook/rook/pkg/apis v0.0.0-20250109065624-77b6565c4f32 h1:hEsXKq9sytxG5K+Td3ury76QLnRsL3ubpUMx8hUpvZY=
 github.com/rook/rook/pkg/apis v0.0.0-20250109065624-77b6565c4f32/go.mod h1:Me+oWAOxt+Hw0wRLhRZAhqbSv1HKzG4gsBTjruFbTIs=
 github.com/rook/secrets v0.0.0-20240315053144-3195f6906937 h1:1TpdIqF9mtQfhNfwOpXdpJTMhx66PonVCCvYcGWvu/I=
@@ -2530,8 +2522,6 @@ github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69
 github.com/subosito/gotenv v1.6.0 h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8=
 github.com/subosito/gotenv v1.6.0/go.mod h1:Dk4QP5c2W3ibzajGcXpNraDfq2IrhjMIvMSWPKKo0FU=
 github.com/substrait-io/substrait-go v0.4.2/go.mod h1:qhpnLmrcvAnlZsUyPXZRqldiHapPTXC3t7xFgDi3aQg=
-github.com/thoas/go-funk v0.9.3 h1:7+nAEx3kn5ZJcnDm2Bh23N2yOtweO14bi//dvRtgLpw=
-github.com/thoas/go-funk v0.9.3/go.mod h1:+IWnUfUmFO1+WVYQWQtIJHeRRdaIyyYglZN7xzUPe4Q=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=
