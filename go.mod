@@ -5,12 +5,12 @@ go 1.23.5
 toolchain go1.23.7
 
 require (
-	github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5
+	github.com/noobaa/noobaa-operator/v5 v5.18.4
 	github.com/pkg/errors v0.9.1
 	github.com/ramendr/ramenctl v0.6.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
-	github.com/rook/rook v1.17.3
+	github.com/rook/rook v1.17.4
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.1
@@ -57,9 +57,6 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
-	github.com/cloudnative-pg/barman-cloud v0.0.0-20241218093921-134c7de4954a // indirect
-	github.com/cloudnative-pg/cloudnative-pg v1.25.0 // indirect
-	github.com/cloudnative-pg/machinery v0.0.0-20241219102532-2807bc88310d // indirect
 	github.com/containernetworking/cni v1.2.3 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
@@ -78,11 +75,9 @@ require (
 	github.com/go-jose/go-jose/v4 v4.0.5 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/go-logr/zapr v1.3.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.1 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/swag v0.23.1 // indirect
-	github.com/go-test/deep v1.1.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
@@ -158,7 +153,6 @@ require (
 	github.com/prometheus/procfs v0.16.0 // indirect
 	github.com/ramendr/ramen/api v0.0.0-20250313143647-8dd671566929 // indirect
 	github.com/ramendr/ramen/e2e v0.0.0-20250526091425-21fdab969a70 // indirect
-	github.com/robfig/cron v1.2.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rook/rook/pkg/apis v0.0.0-20250109065624-77b6565c4f32 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
@@ -181,6 +175,7 @@ require (
 	go.opentelemetry.io/otel v1.35.0 // indirect
 	go.opentelemetry.io/otel/metric v1.35.0 // indirect
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	golang.org/x/crypto v0.39.0 // indirect
