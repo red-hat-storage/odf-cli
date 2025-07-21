@@ -5,12 +5,12 @@ go 1.24.1
 toolchain go1.24.4
 
 require (
-	github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5
+	github.com/noobaa/noobaa-operator/v5 v5.19.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.6.0
+	github.com/ramendr/ramenctl v0.8.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
-	github.com/rook/rook v1.17.3
+	github.com/rook/rook v1.17.6
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	github.com/submariner-io/submariner v0.20.1
@@ -139,7 +139,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f // indirect
-	github.com/nirs/kubectl-gather v0.7.0 // indirect
+	github.com/nirs/kubectl-gather v0.8.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/openshift/api v0.0.0-20241216151652-de9de05a8e43 // indirect
 	github.com/openshift/cloud-credential-operator v0.0.0-20231004191224-abdf0627a0cf // indirect
@@ -156,7 +156,7 @@ require (
 	github.com/prometheus/common v0.63.0 // indirect
 	github.com/prometheus/procfs v0.16.0 // indirect
 	github.com/ramendr/ramen/api v0.0.0-20250313143647-8dd671566929 // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20250526091425-21fdab969a70 // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20250702155156-54e270d8dc49 // indirect
 	github.com/robfig/cron v1.2.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rook/rook/pkg/apis v0.0.0-20250109065624-77b6565c4f32 // indirect
