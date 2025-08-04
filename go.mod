@@ -12,12 +12,12 @@ require (
 	github.com/rook/rook v1.17.1
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	github.com/submariner-io/submariner v0.20.0
-	github.com/submariner-io/submariner-operator v0.20.0
-	golang.org/x/net v0.38.0
-	k8s.io/api v0.32.3
-	k8s.io/apimachinery v0.32.3
-	k8s.io/client-go v0.32.3
+	github.com/submariner-io/submariner v0.20.1
+	github.com/submariner-io/submariner-operator v0.20.1
+	golang.org/x/net v0.42.0
+	k8s.io/api v0.32.4
+	k8s.io/apimachinery v0.32.4
+	k8s.io/client-go v0.32.4
 	sigs.k8s.io/controller-runtime v0.20.4
 )
 
@@ -95,17 +95,17 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
-	github.com/submariner-io/admiral v0.20.0 // indirect
+	github.com/submariner-io/admiral v0.20.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
-	golang.org/x/crypto v0.36.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
 	golang.org/x/exp v0.0.0-20241215155358-4a5509556b9e // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
-	golang.org/x/term v0.30.0 // indirect
-	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/sys v0.34.0 // indirect
+	golang.org/x/term v0.33.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.12.0 // indirect
