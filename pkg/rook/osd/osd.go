@@ -54,12 +54,12 @@ func SafeToDestroy(ctx context.Context, clientsets *k8sutil.Clientsets, operator
 	args := []string{"osd", "safe-to-destroy", osdID}
 	out, err := exec.RunCommandInOperatorPod(ctx, clientsets, "ceph", args, operatorNamespace, storageClusterNamespace, true)
 	if err != nil {
-		return false, errors.Wrapf(err, string(out))
+		return false, errors.Wrapf(err, "command failed: %s", string(out))
 	}
 
 	var safeToDestroy SafeToDestroyStatus
 	if err = json.Unmarshal([]byte(out), &safeToDestroy); err != nil {
-		return false, errors.Wrapf(err, string(out))
+		return false, errors.Wrapf(err, "command failed: %s", string(out))
 	}
 	if len(safeToDestroy.SafeToDestroy) != 0 && fmt.Sprint(safeToDestroy.SafeToDestroy[0]) == osdID {
 		return true, nil
