@@ -135,7 +135,7 @@ odf-dr-test
 > When reporting DR related issues, please create an archive with the output
 > directory and upload it to the issue tracker.
 
-The `test-run.yaml` is a machine and human readable description of the the test run.
+The `test-run.yaml` is a machine and human readable description of the test run.
 
 ```yaml
 host:
