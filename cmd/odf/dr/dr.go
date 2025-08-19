@@ -20,4 +20,5 @@ func init() {
 	DrCmd.AddCommand(commands.InitCmd)
 	DrCmd.AddCommand(commands.TestCmd)
 	DrCmd.AddCommand(commands.ValidateCmd)
+	DrCmd.AddCommand(commands.GatherCmd)
 }
