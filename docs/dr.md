@@ -118,7 +118,7 @@ $ odf dr test run -o odf-dr-test
    ✅ Application "appset-deploy-rbd" unprotected
    ✅ Application "appset-deploy-rbd" undeployed
 
-✅ passed (1 passed, 0 failed, 0 skipped)
+✅ passed (1 passed, 0 failed, 0 skipped, 0 canceled)
 ```
 
 The command stores `test-run.yaml` and `test-run.log` in the specified output
@@ -186,13 +186,12 @@ $ odf dr test clean -o odf-dr-test
    ✅ Config validated
 
 🔎 Clean tests ...
-   ✅ Application "appset-deploy-rbd" unprotected
-   ✅ Application "appset-deploy-rbd" undeployed
+   ✅ Application "appset-deploy-rbd" cleaned up
 
 🔎 Clean environment ...
    ✅ Environment cleaned
 
-✅ passed (1 passed, 0 failed, 0 skipped)
+✅ passed (1 passed, 0 failed, 0 skipped, 0 canceled)
 ```
 
 The command stores `test-clean.yaml` and `test-clean.log` in the specified
