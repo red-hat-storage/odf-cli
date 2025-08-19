@@ -19,4 +19,5 @@ func init() {
 	// Add a subset of ramenctl commands suitable for "odf dr".
 	DrCmd.AddCommand(commands.InitCmd)
 	DrCmd.AddCommand(commands.TestCmd)
+	DrCmd.AddCommand(commands.ValidateCmd)
 }
