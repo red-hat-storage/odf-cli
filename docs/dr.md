@@ -135,41 +135,7 @@ odf-dr-test
 > When reporting DR related issues, please create an archive with the output
 > directory and upload it to the issue tracker.
 
-The `test-run.yaml` is a machine and human readable description of the test run.
-
-```yaml
-host:
-  arch: arm64
-  cpus: 12
-  os: darwin
-name: test-run
-status: passed
-steps:
-- name: validate
-  status: passed
-- name: setup
-  status: passed
-- items:
-  - config:
-      deployer: appset
-      pvcSpec: rbd
-      workload: deploy
-    name: appset-deploy-rbd
-    status: passed
-  name: tests
-  status: passed
-summary:
-  failed: 0
-  passed: 1
-  skipped: 0
-```
-
-You can query it with tools like `yq`:
-
-```bash
-$ yq .status < odf-dr-test/test-run.yaml
-passed
-```
+See [The test-run.yaml](#the-test-run.yaml) for more info on the test report.
 
 To clean up after the test use the [clean](#test-clean) command.
 
@@ -204,4 +170,109 @@ odf-dr-test
 ├── test-clean.yaml
 ├── test-run.log
 └── test-run.yaml
+```
+
+### The test-run.yaml
+
+The `test-run.yaml` is a machine and human readable description of the test run.
+
+```yaml
+config:
+  channel:
+    name: https-github-com-ramendr-ocm-ramen-samples-git
+    namespace: test-gitops
+  clusterSet: clusterset-submariner-52bbff94cfe4421185
+  clusters:
+    c1:
+      kubeconfig: /Users/nir/envs/ocp/c1
+    c2:
+      kubeconfig: /Users/nir/envs/ocp/c2
+    hub:
+      kubeconfig: /Users/nir/envs/ocp/hub
+    passive-hub:
+      kubeconfig: ""
+  deployers:
+  - description: ApplicationSet deployer for ArgoCD
+    name: appset
+    type: appset
+  - description: Subscription deployer for OCM subscriptions
+    name: subscr
+    type: subscr
+  - description: Discovered Application deployer for discovered applications
+    name: disapp
+    type: disapp
+  distro: ocp
+  drPolicy: dr-policy-1m
+  namespaces:
+    argocdNamespace: openshift-gitops
+    ramenDRClusterNamespace: openshift-dr-system
+    ramenHubNamespace: openshift-operators
+    ramenOpsNamespace: openshift-dr-ops
+  pvcSpecs:
+  - accessModes: ReadWriteOnce
+    name: rbd
+    storageClassName: ocs-storagecluster-ceph-rbd
+  - accessModes: ReadWriteMany
+    name: cephfs
+    storageClassName: ocs-storagecluster-cephfs
+  repo:
+    branch: main
+    url: https://github.com/RamenDR/ocm-ramen-samples.git
+  tests:
+  - deployer: appset
+    pvcSpec: rbd
+    workload: deploy
+created: "2025-08-19T15:54:21.917077+03:00"
+duration: 929.939373665
+host:
+  arch: arm64
+  cpus: 12
+  os: darwin
+name: test-run
+status: passed
+steps:
+- duration: 2.989362291
+  name: validate
+  status: passed
+- duration: 0.420524791
+  name: setup
+  status: passed
+- duration: 926.529486583
+  items:
+  - duration: 926.5290810419999
+    items:
+    - duration: 21.914995542
+      name: deploy
+      status: passed
+    - duration: 74.045327833
+      name: protect
+      status: passed
+    - duration: 423.177328667
+      name: failover
+      status: passed
+    - duration: 350.520063166
+      name: relocate
+      status: passed
+    - duration: 35.47629975
+      name: unprotect
+      status: passed
+    - duration: 21.395066084
+      name: undeploy
+      status: passed
+    name: appset-deploy-rbd
+    status: passed
+  name: tests
+  status: passed
+summary:
+  canceled: 0
+  failed: 0
+  passed: 1
+  skipped: 0
+```
+
+You can query it with tools like `yq`:
+
+```bash
+$ yq .status < odf-dr-test/test-run.yaml
+passed
 ```
