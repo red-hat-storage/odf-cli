@@ -2222,8 +2222,8 @@ github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f h1:y5//uYreIhSUg3J
 github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f/go.mod h1:ZdcZmHo+o7JKHSa8/e818NopupXU1YMK5fe1lsApnBw=
 github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uYLpLIr5fm8diHn0JbqRycJi6w0Ms=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
-github.com/nirs/kubectl-gather v0.9.0 h1:GSrkd9n85z3Zb0o3ji1NW+TtSAdR8myq2SV+MQbQpek=
-github.com/nirs/kubectl-gather v0.9.0/go.mod h1:i6GaOi/I6imJ+8U8NLoEsp9Ukn/4kzXZx2ei6Af8MeI=
+github.com/nirs/kubectl-gather v0.10.0 h1:cjfiiA8EVnv88EubSJ2+Bekd7SgNXnrv3AlU2tATF4Y=
+github.com/nirs/kubectl-gather v0.10.0/go.mod h1:i6GaOi/I6imJ+8U8NLoEsp9Ukn/4kzXZx2ei6Af8MeI=
 github.com/noobaa/noobaa-operator/v5 v5.19.0 h1:PtUbgAOl3Wg+YS39DGiCo/aujRL3j6lwJHVbcuneRSU=
 github.com/noobaa/noobaa-operator/v5 v5.19.0/go.mod h1:w3/B2Z/MMTW9TT2bsiN7VMlwfTwQL4KVARr0r7WKEvk=
 github.com/nxadm/tail v1.4.4/go.mod h1:kenIhsEOeOJmVchQTgglprH7qJGnHDVpk1VPCcaMI8A=
@@ -2405,8 +2405,8 @@ github.com/ramendr/ramen/api v0.0.0-20250710152106-9a4f493138c5 h1:2hL/5Ofwx/7O2
 github.com/ramendr/ramen/api v0.0.0-20250710152106-9a4f493138c5/go.mod h1:vtuEN3pI8SD0WEp5jAPf2Bqi/3CeiuQZkNz6F52NIqo=
 github.com/ramendr/ramen/e2e v0.0.0-20250722150952-d4c9b950df94 h1:ts1Z8oSS0ozaenQqd2wQ3z6y//w29GYVmaHwXzoBrGo=
 github.com/ramendr/ramen/e2e v0.0.0-20250722150952-d4c9b950df94/go.mod h1:7/WO8c/srYUJ+S/gmV7qwJABxQX9ymWcaqWjUFewRRc=
-github.com/ramendr/ramenctl v0.9.0 h1:VaT3VkxesYa7HD9AhVDtP05qaxpkr0BiB9QbrJKbGmE=
-github.com/ramendr/ramenctl v0.9.0/go.mod h1:dYzoxc1HayZEcwgXMDxT5zE4ZZUnHAPQR6J7aJ1KFFo=
+github.com/ramendr/ramenctl v0.10.1 h1:0c3z1tWyqHjaywtqnJKv316wjC/0HvWVqTxtm2XI3HE=
+github.com/ramendr/ramenctl v0.10.1/go.mod h1:PjaRtehKB/kazgZyegC2ys09LOjX1NmEtPIHg9PAWuU=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 h1:QRcHe6GTJAgLK7zgF6ivwZ6B0SFe1tONbA7VMQMWjMM=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567/go.mod h1:dGXrk743fq6VG8u6lflEce7ITM7d/9xSBeAbI2RXl9s=
 github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d h1:/AnA3CccDrZZfgaJSKIWMZOznzq2k5W9CXmj4Vyhxik=
