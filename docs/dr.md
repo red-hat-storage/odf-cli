@@ -7,6 +7,11 @@ The dr command supports the following sub-commands:
 * [validate](#validate)
 * [gather](#gather)
 
+> [!IMPORTANT]
+> This command is a developer preview, unsupported and not fully tested.
+> Please see the following document for more info on developer preview:
+> https://access.redhat.com/support/offerings/devpreview.
+
 ## init
 
 The init command crates a configuration file required for all other dr commands.
