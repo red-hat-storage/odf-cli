@@ -5,12 +5,17 @@ The dr command supports the following sub-commands:
 * [init](#init)
 * [test](#test)
 
+> [!IMPORTANT]
+> This command is a developer preview, unsupported and not fully tested.
+> Please see the following document for more info on developer preview:
+> https://access.redhat.com/support/offerings/devpreview.
+
 ## init
 
 The init command crates a configuration file required for all other dr commands.
 
 ```bash
-$ odf dr init
+$ odf dr init --allow-developer-preview
 
 ✅ Created config file "config.yaml" - please modify for your clusters
 ```
@@ -85,7 +90,7 @@ The command supports the following sub-commands:
 The test command tests complete disaster recovery flow with a tiny application.
 
 ```bash
-$ odf dr test run -o odf-dr-test
+$ odf dr test run -o odf-dr-test --allow-developer-preview
 ⭐ Using report "odf-dr-test"
 ⭐ Using config "config.yaml"
 
@@ -163,7 +168,7 @@ To clean up after the test use the [clean](#test-clean) command.
 The clean command delete resources created by the [run](#test-run) command.
 
 ```bash
-$ odf dr test clean -o odf-dr-test
+$ odf dr test clean -o odf-dr-test --allow-developer-preview
 ⭐ Using report "odf-dr-test"
 ⭐ Using config "config.yaml"
 
