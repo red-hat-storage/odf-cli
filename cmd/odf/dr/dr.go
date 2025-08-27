@@ -3,6 +3,8 @@ package dr
 import (
 	"github.com/ramendr/ramenctl/cmd/commands"
 	"github.com/spf13/cobra"
+
+	"github.com/red-hat-storage/odf-cli/cmd/odf/devpreview"
 )
 
 // DrCmd is the dr sub command.
@@ -21,4 +23,6 @@ func init() {
 	DrCmd.AddCommand(commands.TestCmd)
 	DrCmd.AddCommand(commands.ValidateCmd)
 	DrCmd.AddCommand(commands.GatherCmd)
+
+	devpreview.Configure(DrCmd)
 }
