@@ -12,9 +12,9 @@ require (
 	github.com/rook/kubectl-rook-ceph v0.9.4
 	github.com/rook/rook v1.18.0
 	github.com/spf13/cobra v1.9.1
-	github.com/stretchr/testify v1.10.0
-	github.com/submariner-io/submariner v0.20.1
-	github.com/submariner-io/submariner-operator v0.20.1
+	github.com/stretchr/testify v1.11.1
+	github.com/submariner-io/submariner v0.21.0
+	github.com/submariner-io/submariner-operator v0.21.0
 	golang.org/x/net v0.43.0
 	k8s.io/api v0.34.0
 	k8s.io/apimachinery v0.34.0
@@ -170,7 +170,7 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.7 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
-	github.com/submariner-io/admiral v0.20.1 // indirect
+	github.com/submariner-io/admiral v0.21.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
