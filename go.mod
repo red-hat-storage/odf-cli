@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.10.1
+	github.com/ramendr/ramenctl v0.11.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
 	github.com/rook/rook v1.17.3
@@ -136,7 +136,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f // indirect
-	github.com/nirs/kubectl-gather v0.10.0 // indirect
+	github.com/nirs/kubectl-gather v0.10.1 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/openshift/api v0.0.0-20241216151652-de9de05a8e43 // indirect
 	github.com/openshift/cloud-credential-operator v0.0.0-20231004191224-abdf0627a0cf // indirect
