@@ -42,7 +42,8 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
     - `run`: Run disaster recovery test with a tiny application (developer preview)
     - `clean`: Clean up after running tests (developer preview)
   - `validate`:
-    - `application`: Detect disaster recovery problems (developer preview)
+    - `application`: Detect problems in disaster recovery protected application (developer preview)
+    - `clusters`: Detect problems in disaster recovery clusters (developer preview)
   - `gather`:
     - `application`: Collect diagnostic data from your clusters (developer preview)
 - `odf noobaa:` Run a noobaa CLI command. Supports all the noobaa cli arguments available in odf.
