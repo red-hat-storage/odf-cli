@@ -10,8 +10,8 @@ require (
 	github.com/ramendr/ramenctl v0.11.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
-	github.com/rook/rook v1.18.0
-	github.com/spf13/cobra v1.9.1
+	github.com/rook/rook v1.18.1
+	github.com/spf13/cobra v1.10.1
 	github.com/stretchr/testify v1.11.1
 	github.com/submariner-io/submariner v0.21.0
 	github.com/submariner-io/submariner-operator v0.21.0
@@ -168,7 +168,7 @@ require (
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
-	github.com/spf13/pflag v1.0.7 // indirect
+	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/submariner-io/admiral v0.21.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
