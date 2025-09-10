@@ -7,7 +7,7 @@ toolchain go1.24.4
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.19.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.11.0
+	github.com/ramendr/ramenctl v0.11.1
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
 	github.com/rook/rook v1.18.1
@@ -155,7 +155,7 @@ require (
 	github.com/prometheus/common v0.63.0 // indirect
 	github.com/prometheus/procfs v0.16.0 // indirect
 	github.com/ramendr/ramen/api v0.0.0-20250710152106-9a4f493138c5 // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20250722150952-d4c9b950df94 // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20250828115748-9f9340ba03e9 // indirect
 	github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 // indirect
 	github.com/robfig/cron v1.2.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
