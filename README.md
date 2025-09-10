@@ -37,10 +37,10 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
 - `odf radosgw-admin <args>` : Run an RGW CLI command. Supports any arguments the [radosgw-admin](https://docs.ceph.com/en/latest/man/8/radosgw-admin/) command supports. See the radosgw-admin docs for more.
 - `odf rbd <args>` : Call a 'rbd' CLI command with arbitrary args
 - `odf dr`:
-  - `init`: Create configuration file for `odf dr` sub-commands.
+  - `init`: Create configuration file for `odf dr` sub-commands (developer preview)
   - `test`:
-    - `run`: Run distaster recovery test with a tiny application.
-    - `clean`: Clean up after running tests.
+    - `run`: Run disaster recovery test with a tiny application (developer preview)
+    - `clean`: Clean up after running tests (developer preview)
 - `odf help` : Display help text
 
 ## Documentation
