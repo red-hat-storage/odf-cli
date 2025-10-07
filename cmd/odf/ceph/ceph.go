@@ -48,7 +48,7 @@ var CephCmd = &cobra.Command{
 // splitCephDaemonNameAndID splits the arg based on '.' so that we use it with label, example osd.0 to osd and 0
 func splitCephDaemonNameAndID(args string) []string {
 	if !strings.Contains(args, ".") {
-		logging.Fatal(fmt.Errorf("Invalid argument to 'ceph daemon' command: %v. The arg should be in the format of '<daemon.id>'", args))
+		logging.Fatal(fmt.Errorf("invalid argument to 'ceph daemon' command: %v. The arg should be in the format of '<daemon.id>'", args))
 	}
 	return strings.Split(args, ".")
 }
