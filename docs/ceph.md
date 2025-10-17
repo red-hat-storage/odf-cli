@@ -1,4 +1,4 @@
-# Ceph Commnads
+# Ceph Commands
 
 Commands in this doc are an alternate to running the toolbox pod.
 
