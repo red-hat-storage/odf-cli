@@ -3,6 +3,7 @@ module github.com/red-hat-storage/odf-cli
 go 1.21
 
 require (
+	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/pkg/errors v0.9.1
 	github.com/rook/kubectl-rook-ceph v0.8.1-0.20240327033245-3f07e9fd3059
 	github.com/rook/rook v1.14.8
@@ -91,6 +92,10 @@ replace (
 )
 
 exclude (
+	// Exclude old jwt-go packages in favor of golang-jwt/jwt
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
+	github.com/form3tech-oss/jwt-go v3.2.3+incompatible
 	// This tag doesn't exist, but is imported by github.com/portworx/sched-ops.
 	github.com/kubernetes-incubator/external-storage v0.20.4-openstorage-rc2
 	// Exclude pre-go-mod kubernetes tags, because they are older
