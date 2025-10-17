@@ -136,7 +136,7 @@ images: 4 total
 
 ## dr-prereq
 
-This command is used to get the status of all the pre-requisites for enabling Disaster Recovery on a pair of clusters. It takes a peer cluster as argument and uses it to compare current cluster configruation with peer cluster configuration. Based on the results, it will show status of all the pre-requisites.
+This command is used to get the status of all the pre-requisites for enabling Disaster Recovery on a pair of clusters. It takes a peer cluster as argument and uses it to compare current cluster configuration with peer cluster configuration. Based on the results, it will show status of all the pre-requisites.
 
 ```bash
 $ odf get dr-prereq peer-cluster-1
