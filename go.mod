@@ -5,17 +5,17 @@ go 1.24.3
 toolchain go1.24.4
 
 require (
-	github.com/noobaa/noobaa-operator/v5 v5.19.0
+	github.com/noobaa/noobaa-operator/v5 v5.19.4
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.11.1
+	github.com/ramendr/ramenctl v0.12.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.4
-	github.com/rook/rook v1.18.2
+	github.com/rook/rook v1.18.4
 	github.com/spf13/cobra v1.10.1
 	github.com/stretchr/testify v1.11.1
 	github.com/submariner-io/submariner v0.21.0
 	github.com/submariner-io/submariner-operator v0.21.0
-	golang.org/x/net v0.44.0
+	golang.org/x/net v0.46.0
 	k8s.io/api v0.34.1
 	k8s.io/apimachinery v0.34.1
 	k8s.io/client-go v0.34.1
@@ -155,7 +155,7 @@ require (
 	github.com/prometheus/common v0.63.0 // indirect
 	github.com/prometheus/procfs v0.16.0 // indirect
 	github.com/ramendr/ramen/api v0.0.0-20250710152106-9a4f493138c5 // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20250828115748-9f9340ba03e9 // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20250925105626-1e3bf8dbc4d1 // indirect
 	github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 // indirect
 	github.com/robfig/cron v1.2.0 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
@@ -184,13 +184,13 @@ require (
 	go.uber.org/zap v1.27.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
 	golang.org/x/exp v0.0.0-20250711185948-6ae5c78190dc // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
-	golang.org/x/sys v0.36.0 // indirect
-	golang.org/x/term v0.35.0 // indirect
-	golang.org/x/text v0.29.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/term v0.36.0 // indirect
+	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
 	google.golang.org/api v0.171.0 // indirect
@@ -240,6 +240,10 @@ replace (
 )
 
 exclude (
+	// Exclude old jwt-go packages in with of golang-jwt/jwt
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
+	github.com/form3tech-oss/jwt-go v3.2.3+incompatible
 	// This tag doesn't exist, but is imported by github.com/portworx/sched-ops.
 	github.com/kubernetes-incubator/external-storage v0.20.4-openstorage-rc2
 	// Exclude pre-go-mod kubernetes tags, because they are older
