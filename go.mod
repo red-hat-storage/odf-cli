@@ -13,8 +13,8 @@ require (
 	github.com/rook/rook v1.18.6
 	github.com/spf13/cobra v1.10.1
 	github.com/stretchr/testify v1.11.1
-	github.com/submariner-io/submariner v0.21.0
-	github.com/submariner-io/submariner-operator v0.21.0
+	github.com/submariner-io/submariner v0.21.1
+	github.com/submariner-io/submariner-operator v0.21.1
 	golang.org/x/net v0.46.0
 	k8s.io/api v0.34.1
 	k8s.io/apimachinery v0.34.1
@@ -170,7 +170,7 @@ require (
 	github.com/spf13/cast v1.6.0 // indirect
 	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
-	github.com/submariner-io/admiral v0.21.0 // indirect
+	github.com/submariner-io/admiral v0.21.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
@@ -204,9 +204,9 @@ require (
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.33.3 // indirect
+	k8s.io/apiextensions-apiserver v0.33.5 // indirect
 	k8s.io/cli-runtime v0.33.3 // indirect
-	k8s.io/component-base v0.33.3 // indirect
+	k8s.io/component-base v0.33.5 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-aggregator v0.29.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20250710124328-f3f2b991d03b // indirect
