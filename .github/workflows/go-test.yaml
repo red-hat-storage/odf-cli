@@ -1,0 +1,44 @@
+name: Go Test
+
+on:
+  pull_request:
+  push:
+
+defaults:
+  run:
+    # reference: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
+    shell: bash --noprofile --norc -eo pipefail -x {0}
+
+# cancel the in-progress workflow when PR is refreshed.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ODF_SKIP_PROMPTS: true
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: odf-cli test
+        uses: ./.github/workflows/go-test-config
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: collect common logs
+        if: always()
+        uses: ./.github/workflows/collect-logs
+        with:
+          name: go-test
+
+      - name: consider debugging
+        if: failure()
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: false
