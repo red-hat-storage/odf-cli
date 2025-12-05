@@ -1,0 +1,68 @@
+name: "ODF-CLI Go Test Config"
+description: "Configure and run ODF-CLI tests"
+inputs:
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
+  op-ns:
+    description: operator namespace where rook operator will deploy
+    required: false
+    default: openshift-storage
+  cluster-ns:
+    description: cluster namespace where ceph cluster will deploy
+    required: false
+    default: openshift-storage
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+        cache: true
+
+    - name: Install dependencies
+      shell: bash
+      run: go mod download
+
+    - name: Checkout kubectl-rook-ceph
+      uses: actions/checkout@v5
+      with:
+        repository: rook/kubectl-rook-ceph
+        path: kubectl-rook-ceph
+
+    - name: Setup Minikube
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: |
+        kubectl-rook-ceph/tests/github-action-helper.sh install_minikube_with_none_driver v1.31.3
+
+    - name: print k8s cluster status
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: |
+        kubectl cluster-info
+        kubectl get pods -n kube-system
+
+    - name: use local disk
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: kubectl-rook-ceph/tests/github-action-helper.sh use_local_disk
+
+    - name: deploy rook cluster
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: kubectl-rook-ceph/tests/github-action-helper.sh deploy_rook ${{ inputs.op-ns }} ${{ inputs.cluster-ns }}
+
+    - name: Build odf-cli
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: make build
+
+    - name: Run unit tests
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: make test
+
+    - name: Test odf-cli commands
+      shell: bash --noprofile --norc -eo pipefail -x {0}
+      run: |
+        ./bin/odf --help
+        ./bin/odf get health
+        ./bin/odf ceph status
+        ./bin/odf get rook-status

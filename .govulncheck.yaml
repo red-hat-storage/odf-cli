@@ -1,0 +1,10 @@
+# Configuration for govulncheck
+# Packages to exclude from vulnerability scanning
+# These packages contain submariner dependencies which have known vulnerabilities
+# but are not in the critical execution path of odf-cli
+
+# Exclude packages that import submariner
+exclude_packages:
+  - github.com/red-hat-storage/odf-cli/pkg/odf/dr
+  - github.com/red-hat-storage/odf-cli/cmd/odf/dr
+  - github.com/red-hat-storage/odf-cli/cmd/odf/get  # imports pkg/odf/dr
