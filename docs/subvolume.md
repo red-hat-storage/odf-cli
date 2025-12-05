@@ -16,7 +16,7 @@ The subvolume command supports the following sub commands:
 This command will lists all the subvolumes. It also accepts the stale flag to check for stale subvolumes.
 
 * `--stale`: lists only stale subvolumes
-* `--svg <subvolumegroupname`: lists subvolumes in a particular subvolume(default is "csi")
+* `--svg <subvolumegroupname>`: lists subvolumes in a particular subvolume(default is "csi")
 
 ```bash
 odf subvolume ls
