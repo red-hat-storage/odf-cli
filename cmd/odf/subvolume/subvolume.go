@@ -28,7 +28,6 @@ var deleteCmd = &cobra.Command{
 	Use:                "delete",
 	Short:              "Deletes a stale subvolume",
 	DisableFlagParsing: true,
-	Hidden:             true,
 	Args:               cobra.ExactArgs(3),
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
