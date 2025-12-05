@@ -16,6 +16,7 @@ The subvolume command supports the following sub commands:
 This command will lists all the subvolumes. It also accepts the stale flag to check for stale subvolumes.
 
 * `--stale`: lists only stale subvolumes
+* `--svg <subvolumegroupname`: lists subvolumes in a particular subvolume(default is "csi")
 
 ```bash
 odf subvolume ls
@@ -33,6 +34,14 @@ odf subvolume ls --stale
 # Filesystem  Subvolume Subvolumegroup State
 # ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110004 csi stale
 # ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110005 csi stale
+```
+
+```bash
+odf subvolume ls --svg svg01
+
+# Filesystem  Subvolume Subvolumegroup State
+# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110005 svg01 in-use
+# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110007 svg01 stale
 ```
 
 ## delete
