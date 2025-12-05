@@ -9,8 +9,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/ramendr/ramenctl v0.12.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
-	github.com/rook/kubectl-rook-ceph v0.9.5-0.20251024073622-5492aae82c71
-	github.com/rook/rook v1.18.6
+	github.com/rook/kubectl-rook-ceph v0.9.6-0.20251202171124-d618a9ba3ef3
+	github.com/rook/rook v1.18.7
 	github.com/spf13/cobra v1.10.1
 	github.com/stretchr/testify v1.11.1
 	github.com/submariner-io/submariner v0.21.1
@@ -116,7 +116,7 @@ require (
 	github.com/kedacore/keda/v2 v2.7.0 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20221122204822-d1a8c34382f1 // indirect
-	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.2.0 // indirect
+	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.4.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/libopenstorage/secrets v0.0.0-20240416031220-a17cf7f72c6c // indirect
@@ -168,7 +168,7 @@ require (
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/spf13/cast v1.6.0 // indirect
-	github.com/spf13/pflag v1.0.9 // indirect
+	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/spf13/viper v1.19.0 // indirect
 	github.com/submariner-io/admiral v0.21.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
