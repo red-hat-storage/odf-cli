@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-
 	"os"
 	"os/exec"
 	"strings"
@@ -17,6 +16,7 @@ func RunBenchmarkWorkflow(resourcesJsonPath, daemonsetYamlPath string) error {
 	ctx := context.Background()
 
 	logging.Info("🚀 Creating ConfigMap from resources.json...")
+	// #nosec G204 -- resourcesJsonPath is provided by the CLI caller
 	createCmd := exec.CommandContext(ctx, "oc", "create", "configmap", "benchmark-metrics", "--from-file=benchmark.json="+resourcesJsonPath, "--dry-run=client", "-o", "yaml")
 	applyCmd := exec.CommandContext(ctx, "oc", "apply", "-f", "-")
 
@@ -31,9 +31,13 @@ func RunBenchmarkWorkflow(resourcesJsonPath, daemonsetYamlPath string) error {
 		return fmt.Errorf("failed to start configmap apply: %v", err)
 	}
 
-	createCmd.Wait()
+	if err := createCmd.Wait(); err != nil {
+		return fmt.Errorf("failed to wait for configmap creation: %v", err)
+	}
 	pipeWriter.Close()
-	applyCmd.Wait()
+	if err := applyCmd.Wait(); err != nil {
+		return fmt.Errorf("failed to wait for configmap apply: %v", err)
+	}
 	pipeReader.Close()
 
 	logging.Info("✅ ConfigMap applied. Applying DaemonSet...")
@@ -71,7 +75,10 @@ func RunBenchmarkWorkflow(resourcesJsonPath, daemonsetYamlPath string) error {
 		return fmt.Errorf("failed to list benchmark pods: %v", err)
 	}
 
-	os.MkdirAll("benchmark-logs", 0755)
+	if err := os.MkdirAll("benchmark-logs", 0o600); err != nil {
+		return fmt.Errorf("failed to create benchmark-logs directory: %v", err)
+	}
+
 	for _, pod := range strings.Split(strings.TrimSpace(string(out)), "\n") {
 		name := strings.Split(pod, "/")[1]
 		logOut, err := exec.CommandContext(ctx, "oc", "logs", pod).Output()
@@ -79,7 +86,10 @@ func RunBenchmarkWorkflow(resourcesJsonPath, daemonsetYamlPath string) error {
 			fmt.Printf("❌ Failed to get logs from %s: %v\n", name, err)
 			continue
 		}
-		os.WriteFile("benchmark-logs/"+name+".log", logOut, 0644)
+		if err := os.WriteFile("benchmark-logs/"+name+".log", logOut, 0o600); err != nil {
+			fmt.Printf("❌ Failed to write logs for %s: %v\n", name, err)
+			continue
+		}
 		fmt.Printf("✅ Logs saved for pod %s\n", name)
 	}
 

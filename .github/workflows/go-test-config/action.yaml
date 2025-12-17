@@ -1,0 +1,76 @@
+name: "ODF-CLI Go Test Config"
+description: "Configure and run ODF-CLI tests"
+inputs:
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+        cache: true
+
+    - name: Install dependencies
+      shell: bash
+      run: go mod download
+
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+      with:
+        minikube-version: 1.31.2
+        kubernetes-version: v1.28.3
+        driver: docker
+        container-runtime: containerd
+        cpus: 2
+        memory: 4096m
+        addons: default,storage-provisioner
+
+    - name: Wait for cluster ready
+      shell: bash
+      run: |
+        kubectl wait --for=condition=Ready nodes --all --timeout=300s
+        kubectl get nodes -o wide
+        kubectl cluster-info
+
+    - name: Deploy Rook Ceph
+      shell: bash
+      run: |
+        git clone --single-branch --branch master https://github.com/rook/rook.git
+
+        kubectl create -f rook/deploy/examples/crds.yaml
+        sed "s/namespace: rook-ceph/namespace: openshift-storage/g" rook/deploy/examples/common.yaml | kubectl create -f -
+        sed "s/namespace: rook-ceph/namespace: openshift-storage/g" rook/deploy/examples/operator.yaml | kubectl create -f -
+
+        kubectl -n openshift-storage wait --for=condition=Ready pod -l app=rook-ceph-operator --timeout=300s
+
+    - name: Create Ceph cluster
+      shell: bash
+      run: |
+        sed "s/namespace: rook-ceph/namespace: openshift-storage/g" rook/deploy/examples/cluster-test.yaml | kubectl create -f -
+
+        kubectl -n openshift-storage wait --for=condition=Ready cephcluster/rook-ceph --timeout=900s
+
+    - name: Create storage class
+      shell: bash
+      run: |
+        sed "s/namespace: rook-ceph/namespace: openshift-storage/g" rook/deploy/examples/csi/rbd/storageclass-test.yaml | kubectl create -f -
+
+    - name: Build odf-cli
+      shell: bash
+      run: make build
+
+    - name: Run unit tests
+      shell: bash
+      run: make test
+
+    - name: Test odf-cli commands
+      shell: bash
+      run: |
+        ./bin/odf --help
+        ./bin/odf get health
+        ./bin/odf ceph status
+        ./bin/odf get rook-status

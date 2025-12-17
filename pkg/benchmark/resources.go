@@ -56,11 +56,10 @@ func CollectResources(outputPath string) error {
 		return err
 	}
 
-	return os.WriteFile(outputPath, jsonBytes, 0644)
+	return os.WriteFile(outputPath, jsonBytes, 0o600)
 }
 
 func getClusterNodes() ([]string, error) {
-
 	nodeList, err := root.ClientSets.Kube.CoreV1().Nodes().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to list nodes: %v", err)
@@ -74,6 +73,7 @@ func getClusterNodes() ([]string, error) {
 }
 
 func getNodeDisks(nodeName string) ([]string, error) {
+	// #nosec G204 -- intentional subprocess
 	cmd := exec.Command("oc", "debug", "node/"+nodeName, "--", "chroot", "/host", "lsblk", "-d", "-n", "-o", "NAME")
 	output, err := cmd.Output()
 	if err != nil {
@@ -90,6 +90,7 @@ func getNodeDisks(nodeName string) ([]string, error) {
 }
 
 func getMountedDisks(nodeName string) ([]string, error) {
+	// #nosec G204 -- intentional subprocess
 	cmd := exec.Command("oc", "debug", "node/"+nodeName, "--", "chroot", "/host", "lsblk", "-o", "NAME,MOUNTPOINT")
 	output, err := cmd.Output()
 	if err != nil {
@@ -138,6 +139,7 @@ func parseLines(output []byte) []string {
 }
 
 func getNodeNics(nodeName string) ([]string, error) {
+	// #nosec G204 -- intentional subprocess
 	cmd := exec.Command("oc", "debug", "node/"+nodeName, "--", "chroot", "/host", "ip", "-o", "link", "show")
 	output, err := cmd.Output()
 	if err != nil {

@@ -68,7 +68,7 @@ func isSubmarinerEnabled(ctx context.Context, client ctrl.Client) (submarinerv1a
 
 func isGlobalnetRequired(ctx context.Context, client ctrl.Client, clusterID, peerClusterID string) (bool, error) {
 	if clusterID == peerClusterID {
-		return false, fmt.Errorf("Current ClusterID and peer ClusterID refer to the same cluster. Provide a different peer ClusterID.")
+		return false, fmt.Errorf("current ClusterID and peer ClusterID refer to the same cluster. Provide a different peer ClusterID")
 	}
 
 	clusterCR := &submarinerv1.Cluster{}
