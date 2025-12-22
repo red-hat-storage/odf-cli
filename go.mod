@@ -7,7 +7,7 @@ toolchain go1.24.4
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.20.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.13.0
+	github.com/ramendr/ramenctl v0.15.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.6-0.20251202171124-d618a9ba3ef3
 	github.com/rook/rook v1.18.8
