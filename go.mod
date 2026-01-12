@@ -1,8 +1,6 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.24.3
-
-toolchain go1.24.4
+go 1.25.0
 
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.20.0
@@ -16,9 +14,9 @@ require (
 	github.com/submariner-io/submariner v0.22.0
 	github.com/submariner-io/submariner-operator v0.22.0
 	golang.org/x/net v0.48.0
-	k8s.io/api v0.34.3
-	k8s.io/apimachinery v0.34.3
-	k8s.io/client-go v0.34.3
+	k8s.io/api v0.35.0
+	k8s.io/apimachinery v0.35.0
+	k8s.io/client-go v0.35.0
 	sigs.k8s.io/controller-runtime v0.22.3
 )
 
