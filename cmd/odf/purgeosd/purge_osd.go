@@ -13,8 +13,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var forceFlag = "force"
-
 var CephPurgeOsdCmd = &cobra.Command{
 	Use:     "purge-osd",
 	Short:   "Permanently remove an OSD from the cluster.",
@@ -31,7 +29,7 @@ var CephPurgeOsdCmd = &cobra.Command{
 			var answer string
 			yesForceDestroyOSD := "yes-force-destroy-osd"
 			logging.Warning("Are you sure you want to purge osd.%s? The OSD is *not* safe to destroy. This may lead to data loss. If you are sure the OSD should be purged, enter '%s'", osdID, yesForceDestroyOSD)
-			fmt.Scanf("%s", &answer)
+			fmt.Scanf("%s", &answer) //nolint:errcheck // validation happens in PromptToContinueOrCancel
 
 			err := mons.PromptToContinueOrCancel(yesForceDestroyOSD, answer)
 			if err != nil {
@@ -51,7 +49,7 @@ func validateOsdID(cmd *cobra.Command, args []string) error {
 	osdID := args[0]
 	_, err := strconv.Atoi(osdID)
 	if err != nil {
-		return fmt.Errorf("Invalid ID %s, the OSD ID must be an integer. %v", osdID, err)
+		return fmt.Errorf("invalid ID %s, the OSD ID must be an integer. %v", osdID, err)
 	}
 
 	return nil

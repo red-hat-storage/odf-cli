@@ -1,13 +1,13 @@
 package dr
 
 import (
+	"context"
 	"reflect"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	submarinerv1alpha1 "github.com/submariner-io/submariner-operator/api/v1alpha1"
 	submarinerv1 "github.com/submariner-io/submariner/pkg/apis/submariner.io/v1"
-	"golang.org/x/net/context"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -18,7 +18,7 @@ import (
 )
 
 func Test_isSubmarinerEnabled(t *testing.T) {
-	var scheme = runtime.NewScheme()
+	scheme := runtime.NewScheme()
 	err := submarinerv1alpha1.AddToScheme(scheme)
 	assert.NoError(t, err)
 
@@ -38,7 +38,7 @@ func Test_isSubmarinerEnabled(t *testing.T) {
 }
 
 func Test_isGlobalnetRequired(t *testing.T) {
-	var scheme = runtime.NewScheme()
+	scheme := runtime.NewScheme()
 	err := submarinerv1.AddToScheme(scheme)
 	assert.NoError(t, err)
 
