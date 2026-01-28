@@ -298,8 +298,8 @@ The command supports the following sub-commands:
 ### validate application
 
 The validate application command validates a specific DR-protected application
-by gathering related namespaces from all clusters and inspecting the gathered
-resources.
+by gathering related namespaces from all clusters, S3 data and inspecting the
+gathered resources.
 
 #### Looking up applications
 
@@ -330,9 +330,12 @@ $ odf dr validate application --name appset-deploy-rbd --namespace openshift-git
    ✅ Gathered data from cluster "dr2"
    ✅ Gathered data from cluster "dr1"
    ✅ Gathered data from cluster "hub"
+   ✅ Inspected S3 profiles
+   ✅ Gathered S3 profile "minio-on-dr1"
+   ✅ Gathered S3 profile "minio-on-dr2"
    ✅ Application validated
 
-✅ Validation completed (21 ok, 0 stale, 0 problem)
+✅ Validation completed (24 ok, 0 stale, 0 problem)
 ```
 
 The command gathered related namespaces from all clusters, inspected the
@@ -417,6 +420,18 @@ applicationStatus:
       state:
         state: ok ✅
         value: Primary
+  s3:
+    profiles:
+      state: ok ✅
+      value:
+      - gathered:
+          state: ok ✅
+          value: true
+        name: minio-on-dr1
+      - gathered:
+          state: ok ✅
+          value: true
+        name: minio-on-dr2
   secondaryCluster:
     name: dr2
     vrg:
@@ -453,11 +468,16 @@ out/validate-application.data
 │   │   └── namespaces
 │   └── namespaces
 │       └── e2e-appset-deploy-rbd
-└── hub
-    ├── cluster
-    │   └── namespaces
-    └── namespaces
-        └── openshift-gitops
+├── hub
+│   ├── cluster
+│   │   └── namespaces
+│   └── namespaces
+│       └── argocd
+└── s3
+    ├── minio-on-dr1
+    │   └── e2e-appset-deploy-rbd
+    └── minio-on-dr2
+        └── e2e-appset-deploy-rbd
 ```
 
 #### The validate-application.log
@@ -469,7 +489,8 @@ the log.
 ### validate clusters
 
 The validate clusters command validates the disaster recovery clusters by
-gathering cluster scoped and related ramen resources from all clusters.
+gathering cluster scoped and related ramen resources from all clusters,
+and validates that configured S3 endpoints are accessible.
 
 ### Validating clusters
 
@@ -487,9 +508,12 @@ $ odf dr validate clusters -o out
    ✅ Gathered data from cluster "hub"
    ✅ Gathered data from cluster "dr1"
    ✅ Gathered data from cluster "dr2"
+   ✅ Inspected S3 profiles
+   ✅ Checked S3 profile "minio-on-dr2"
+   ✅ Checked S3 profile "minio-on-dr1"
    ✅ Clusters validated
 
-✅ Validation completed (36 ok, 0 stale, 0 problem)
+✅ Validation completed (90 ok, 0 stale, 0 problem)
 ```
 
 The command gathered cluster scoped and ramen resources from all clusters,
@@ -531,18 +555,60 @@ clustersStatus:
         s3StoreProfiles:
           state: ok ✅
           value:
-          - s3ProfileName: minio-on-dr1
-            s3SecretRef:
+          - bucket:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr1
-                namespace: ramen-system
-          - s3ProfileName: minio-on-dr2
-            s3SecretRef:
+              value: bucket
+            caCertificate:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr2
-                namespace: ramen-system
+            endpoint:
+              state: ok ✅
+              value: http://dr1-endpoint:30000
+            profileName: minio-on-dr1
+            region:
+              state: ok ✅
+              value: us-west-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr1
+              namespace:
+                state: ok ✅
+                value: ramen-system
+          - bucket:
+              state: ok ✅
+              value: bucket
+            caCertificate:
+              state: ok ✅
+            endpoint:
+              state: ok ✅
+              value: http://dr2-endpoint:30000
+            profileName: minio-on-dr2
+            region:
+              state: ok ✅
+              value: us-east-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr2
+              namespace:
+                state: ok ✅
+                value: ramen-system
       deployment:
         conditions:
         - state: ok ✅
@@ -569,18 +635,60 @@ clustersStatus:
         s3StoreProfiles:
           state: ok ✅
           value:
-          - s3ProfileName: minio-on-dr1
-            s3SecretRef:
+          - bucket:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr1
-                namespace: ramen-system
-          - s3ProfileName: minio-on-dr2
-            s3SecretRef:
+              value: bucket
+            caCertificate:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr2
-                namespace: ramen-system
+            endpoint:
+              state: ok ✅
+              value: http://dr1-endpoint:30000
+            profileName: minio-on-dr1
+            region:
+              state: ok ✅
+              value: us-west-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr1
+              namespace:
+                state: ok ✅
+                value: ramen-system
+          - bucket:
+              state: ok ✅
+              value: bucket
+            caCertificate:
+              state: ok ✅
+            endpoint:
+              state: ok ✅
+              value: http://dr2-endpoint:30000
+            profileName: minio-on-dr2
+            region:
+              state: ok ✅
+              value: us-east-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr2
+              namespace:
+                state: ok ✅
+                value: ramen-system
       deployment:
         conditions:
         - state: ok ✅
@@ -639,18 +747,60 @@ clustersStatus:
         s3StoreProfiles:
           state: ok ✅
           value:
-          - s3ProfileName: minio-on-dr1
-            s3SecretRef:
+          - bucket:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr1
-                namespace: ramen-system
-          - s3ProfileName: minio-on-dr2
-            s3SecretRef:
+              value: bucket
+            caCertificate:
               state: ok ✅
-              value:
-                name: ramen-s3-secret-dr2
-                namespace: ramen-system
+            endpoint:
+              state: ok ✅
+              value: http://dr1-endpoint:30000
+            profileName: minio-on-dr1
+            region:
+              state: ok ✅
+              value: us-west-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr1
+              namespace:
+                state: ok ✅
+                value: ramen-system
+          - bucket:
+              state: ok ✅
+              value: bucket
+            caCertificate:
+              state: ok ✅
+            endpoint:
+              state: ok ✅
+              value: http://dr2-endpoint:30000
+            profileName: minio-on-dr2
+            region:
+              state: ok ✅
+              value: us-east-1
+            secret:
+              awsAccessKeyID:
+                state: ok ✅
+                value: 57:91:B6:22:67:43:C5:6F:44:F8:27:4C:C6:7B:8B:EB:97:51:B6:40:3E:69:72:43:AD:00:FD:37:AF:56:35:E3
+              awsSecretAccessKey:
+                state: ok ✅
+                value: 17:9C:07:6A:C5:22:15:9D:BB:D5:0D:4F:1D:84:FA:F0:55:51:FE:5B:59:D7:E5:82:4A:80:0D:46:55:9F:B1:D1
+              deleted:
+                state: ok ✅
+              name:
+                state: ok ✅
+                value: ramen-s3-secret-dr2
+              namespace:
+                state: ok ✅
+                value: ramen-system
       deployment:
         conditions:
         - state: ok ✅
@@ -664,6 +814,18 @@ clustersStatus:
         replicas:
           state: ok ✅
           value: 1
+  s3:
+    profiles:
+      state: ok ✅
+      value:
+      - accessible:
+          state: ok ✅
+          value: true
+        name: minio-on-dr2
+      - accessible:
+          state: ok ✅
+          value: true
+        name: minio-on-dr1
 ```
 
 #### The validate-clusters.data directory
@@ -757,8 +919,8 @@ The command supports the following sub-commands:
 ### gather application
 
 The gather application command gathers data for a specific disaster recover
-protected application. It gathers entire namespaces related to the protected
-application across the hub and the managed clusters.
+protected application. It gathers entire namespaces and S3 data related to the
+protected application across the hub and the managed clusters.
 
 #### Looking up applications
 
@@ -789,6 +951,9 @@ $ odf dr gather application --name appset-deploy-rbd --namespace argocd -o out
    ✅ Gathered data from cluster "hub"
    ✅ Gathered data from cluster "dr1"
    ✅ Gathered data from cluster "dr2"
+   ✅ Inspected S3 profiles
+   ✅ Gathered S3 profile "minio-on-dr1"
+   ✅ Gathered S3 profile "minio-on-dr2"
 
 ✅ Gather completed
 ```
@@ -826,12 +991,17 @@ out/gather-application.data
 │   └── namespaces
 │       ├── e2e-appset-deploy-rbd
 │       └── ramen-system
-└── hub
-    ├── cluster
-    │   └── namespaces
-    └── namespaces
-        ├── argocd
-        └── ramen-system
+├── hub
+│   ├── cluster
+│   │   └── namespaces
+│   └── namespaces
+│       ├── argocd
+│       └── ramen-system
+└── s3
+    ├── minio-on-dr1
+    │   └── test-appset-deploy-rbd
+    └── minio-on-dr2
+        └── test-appset-deploy-rbd
 ```
 
 You can use standard tools to inspect the resources:
