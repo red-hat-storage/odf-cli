@@ -1,5 +1,5 @@
 build:
-	gofmt -w $(shell find . -type f -name '*.go')
+	find . -type f -name '*.go' -print0 | xargs -0 gofmt -w
 	@echo
 	env GOOS=$(shell go env GOOS) GOARCH=$(shell go env GOARCH) go build -o bin/odf  cmd/odf/main.go
 
