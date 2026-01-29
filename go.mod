@@ -7,7 +7,7 @@ toolchain go1.24.4
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.20.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.13.0
+	github.com/ramendr/ramenctl v0.16.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.6-0.20251202171124-d618a9ba3ef3
 	github.com/rook/rook v1.18.8
@@ -200,6 +200,7 @@ require (
 	github.com/submariner-io/admiral v0.22.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
+	github.com/yosssi/gohtml v0.0.0-20201013000340-ee4748c638f4 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.60.0 // indirect
