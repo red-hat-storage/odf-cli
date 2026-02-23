@@ -6,6 +6,7 @@ import (
 	"github.com/red-hat-storage/odf-cli/cmd/odf/dr"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/get"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/maintenance"
+	"github.com/red-hat-storage/odf-cli/cmd/odf/multus"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/noobaa"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/operator"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/purgeosd"
@@ -31,6 +32,7 @@ func addcommands() {
 		purgeosd.CephPurgeOsdCmd,
 		subvolume.SubvolumeCmd,
 		maintenance.MaintenanceCmd,
+		multus.MultusCmd,
 		operator.OperatorCmd,
 		restore.RestoreCrd,
 		ceph.CephCmd,
