@@ -14,9 +14,9 @@ require (
 	github.com/submariner-io/submariner v0.22.0
 	github.com/submariner-io/submariner-operator v0.22.0
 	golang.org/x/net v0.50.0
-	k8s.io/api v0.35.0
-	k8s.io/apimachinery v0.35.0
-	k8s.io/client-go v0.35.0
+	k8s.io/api v0.35.1
+	k8s.io/apimachinery v0.35.1
+	k8s.io/client-go v0.35.1
 	sigs.k8s.io/controller-runtime v0.22.4
 )
 
