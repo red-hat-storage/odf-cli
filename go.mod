@@ -11,8 +11,8 @@ require (
 	github.com/rook/rook v1.19.1
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
-	github.com/submariner-io/submariner v0.22.0
-	github.com/submariner-io/submariner-operator v0.22.0
+	github.com/submariner-io/submariner v0.22.1
+	github.com/submariner-io/submariner-operator v0.22.1
 	golang.org/x/net v0.50.0
 	k8s.io/api v0.35.1
 	k8s.io/apimachinery v0.35.1
@@ -216,7 +216,7 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/spf13/viper v1.21.0 // indirect
 	github.com/spiffe/go-spiffe/v2 v2.6.0 // indirect
-	github.com/submariner-io/admiral v0.22.0 // indirect
+	github.com/submariner-io/admiral v0.22.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/sykesm/zap-logfmt v0.0.4 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
