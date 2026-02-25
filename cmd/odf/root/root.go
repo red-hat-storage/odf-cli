@@ -129,10 +129,10 @@ func getControllerRuntimeClient() ctrl.Client {
 func preValidationCheck(ctx context.Context, k8sclientset *k8sutil.Clientsets, operatorNamespace, storageClusterNamespace string) {
 	_, err := k8sclientset.Kube.CoreV1().Namespaces().Get(ctx, operatorNamespace, v1.GetOptions{})
 	if err != nil {
-		logging.Fatal(fmt.Errorf("Operator namespace '%s' does not exist. %v", operatorNamespace, err))
+		logging.Fatal(fmt.Errorf("operator namespace '%s' does not exist. %v", operatorNamespace, err))
 	}
 	_, err = k8sclientset.Kube.CoreV1().Namespaces().Get(ctx, storageClusterNamespace, v1.GetOptions{})
 	if err != nil {
-		logging.Fatal(fmt.Errorf("StorageCluster namespace '%s' does not exist. %v", storageClusterNamespace, err))
+		logging.Fatal(fmt.Errorf("storageCluster namespace '%s' does not exist. %v", storageClusterNamespace, err))
 	}
 }

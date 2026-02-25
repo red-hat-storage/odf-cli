@@ -58,15 +58,18 @@ var deletedCmd = &cobra.Command{
 	Args:               cobra.RangeArgs(1, 2),
 	Example:            "odf restore deleted <CRD> [CRNAME]",
 	PreRun: func(cmd *cobra.Command, args []string) {
-		k8sutil.WaitForPodToRun(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "app=rook-ceph-operator")
-
+		if _, err := k8sutil.WaitForPodToRun(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "app=rook-ceph-operator"); err != nil {
+			logging.Fatal(fmt.Errorf("failed to wait for rook-ceph-operator pod: %v", err))
+		}
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		k8sutil.SetDeploymentScale(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "ocs-operator", 0)
+		if err := k8sutil.SetDeploymentScale(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "ocs-operator", 0); err != nil {
+			logging.Fatal(fmt.Errorf("failed to scale down ocs-operator: %v", err))
+		}
 		// Parse the fully qualified CRD (e.g. "cephclusters.ceph.rook.io").
 		resourceName, groupName, version, err := parseFullyQualifiedCRD(args[0])
 		if err != nil {
-			logging.Fatal(fmt.Errorf("Error parsing CRD type: %v\n", err))
+			logging.Fatal(fmt.Errorf("error parsing CRD type: %v", err))
 		}
 		// Construct a new args slice with the resource name as the first argument.
 		newArgs := make([]string, len(args))
@@ -111,6 +114,8 @@ var deletedCmd = &cobra.Command{
 		}
 
 		pkgrestore.RestoreCrd(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, groupName, version, "ocs-operator", customResources, newArgs)
-		k8sutil.SetDeploymentScale(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "ocs-operator", 1)
+		if err := k8sutil.SetDeploymentScale(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "ocs-operator", 1); err != nil {
+			logging.Fatal(fmt.Errorf("failed to scale up ocs-operator: %v", err))
+		}
 	},
 }
