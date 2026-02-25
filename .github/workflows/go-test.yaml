@@ -1,0 +1,92 @@
+name: Go Test
+
+on:
+  pull_request:
+  push:
+
+defaults:
+  run:
+    # reference: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
+    shell: bash --noprofile --norc -eo pipefail -x {0}
+
+# cancel the in-progress workflow when PR is refreshed.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ODF_SKIP_PROMPTS: true
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Install cri-dockerd
+        run: |
+          curl -LO https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.21/cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
+          sudo dpkg -i cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
+          rm -f cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
+
+      - name: Setup Minikube
+        uses: medyagh/setup-minikube@latest
+        with:
+          minikube-version: "1.37.0"
+          kubernetes-version: v1.35.0
+          driver: none
+          container-runtime: docker
+          memory: 6g
+          cpus: 2
+          addons: ingress
+          cni: calico
+
+      - name: Wait for cluster ready
+        shell: bash
+        run: |
+          kubectl wait --for=condition=Ready nodes --all --timeout=300s
+          kubectl get nodes -o wide
+          kubectl cluster-info
+
+      - name: use local disk
+        run: tests/github-action-helper.sh use_local_disk
+
+      - name: deploy rook cluster
+        run: tests/github-action-helper.sh deploy_rook openshift-storage openshift-storage
+
+      - name: Build odf-cli
+        shell: bash
+        run: make build
+
+      - name: Run unit tests
+        shell: bash
+        run: make test
+
+      - name: Test odf-cli commands
+        shell: bash
+        run: |
+          ./bin/odf --help
+          ./bin/odf get health
+          ./bin/odf ceph status
+          ./bin/odf get rook-status
+
+      - name: collect common logs
+        if: always()
+        uses: ./.github/workflows/collect-logs
+        with:
+          name: go-test
+
+      - name: consider debugging
+        if: failure()
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: false
