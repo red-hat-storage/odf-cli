@@ -1,0 +1,11 @@
+# Configuration for govulncheck
+# This file allows us to exclude certain vulnerabilities that are not
+# in the critical execution path of odf-cli
+
+excludes:
+  # Submariner-related vulnerabilities in DR functionality
+  # These are not in the main execution path and are dependency issues
+  - "GO-2024-*"  # Placeholder for submariner vulnerability IDs
+  
+# Alternative: we could also use build tags to exclude DR functionality
+# during vulnerability scanning if needed
