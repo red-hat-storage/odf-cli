@@ -1,0 +1,42 @@
+name: 'Collect Logs'
+description: 'Collect cluster logs for debugging'
+inputs:
+  name:
+    description: 'Name identifier for the log collection'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Collect cluster logs
+      if: always()
+      shell: bash
+      run: |
+        echo "=== Collecting logs for ${{ inputs.name }} ==="
+        echo ""
+
+        echo "=== Kubernetes resources in openshift-storage namespace ==="
+        kubectl get all -n openshift-storage -o wide || true
+        echo ""
+
+        echo "=== CephCluster status ==="
+        kubectl get cephcluster -n openshift-storage -o yaml || true
+        echo ""
+
+        echo "=== Rook Operator logs ==="
+        kubectl logs -n openshift-storage -l app=rook-ceph-operator --tail=500 || true
+        echo ""
+
+        echo "=== Ceph Mon logs ==="
+        kubectl logs -n openshift-storage -l app=rook-ceph-mon --tail=500 || true
+        echo ""
+
+        echo "=== Ceph OSD logs ==="
+        kubectl logs -n openshift-storage -l app=rook-ceph-osd --tail=500 || true
+        echo ""
+
+        echo "=== Ceph MGR logs ==="
+        kubectl logs -n openshift-storage -l app=rook-ceph-mgr --tail=500 || true
+        echo ""
+
+        echo "=== Done collecting logs for ${{ inputs.name }} ==="
