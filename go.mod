@@ -13,7 +13,6 @@ require (
 	github.com/stretchr/testify v1.11.1
 	github.com/submariner-io/submariner v0.22.1
 	github.com/submariner-io/submariner-operator v0.22.1
-	golang.org/x/net v0.50.0
 	k8s.io/api v0.35.1
 	k8s.io/apimachinery v0.35.1
 	k8s.io/client-go v0.35.1
@@ -237,6 +236,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.48.0 // indirect
 	golang.org/x/exp v0.0.0-20250711185948-6ae5c78190dc // indirect
+	golang.org/x/net v0.51.0 // indirect
 	golang.org/x/oauth2 v0.33.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.41.0 // indirect
