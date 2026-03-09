@@ -3,7 +3,7 @@ module github.com/red-hat-storage/odf-cli
 go 1.25.0
 
 require (
-	github.com/noobaa/noobaa-operator/v5 v5.0.0-20260218124718-9426a5df2d4b
+	github.com/noobaa/noobaa-operator/v5 v5.20.0
 	github.com/pkg/errors v0.9.1
 	github.com/ramendr/ramenctl v0.16.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
@@ -92,7 +92,7 @@ require (
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
 	github.com/coreos/pkg v0.0.0-20240122114842-bbd7aa9bf6fb // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/distribution/reference v0.6.0 // indirect
+	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/emicklei/go-restful/v3 v3.13.0 // indirect
 	github.com/envoyproxy/go-control-plane/envoy v1.36.0 // indirect
 	github.com/envoyproxy/protoc-gen-validate v1.2.1 // indirect
