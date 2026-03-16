@@ -1,9 +1,9 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.25.0
+go 1.25.5
 
 require (
-	github.com/noobaa/noobaa-operator/v5 v5.0.0-20260218124718-9426a5df2d4b
+	github.com/noobaa/noobaa-operator/v5 v5.21.0
 	github.com/pkg/errors v0.9.1
 	github.com/ramendr/ramenctl v0.16.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
@@ -11,8 +11,8 @@ require (
 	github.com/rook/rook v1.19.2
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
-	github.com/submariner-io/submariner v0.22.1
-	github.com/submariner-io/submariner-operator v0.22.1
+	github.com/submariner-io/submariner v0.23.1
+	github.com/submariner-io/submariner-operator v0.23.1
 	k8s.io/api v0.35.2
 	k8s.io/apimachinery v0.35.2
 	k8s.io/client-go v0.35.2
@@ -157,7 +157,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/k8snetworkplumbingwg/network-attachment-definition-client v1.7.7 // indirect
-	github.com/kedacore/keda/v2 v2.18.1 // indirect
+	github.com/kedacore/keda/v2 v2.18.3 // indirect
 	github.com/klauspost/compress v1.18.1 // indirect
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20221122204822-d1a8c34382f1 // indirect
 	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.4.0 // indirect
@@ -194,8 +194,8 @@ require (
 	github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/portworx/sched-ops v1.20.4-rc1.0.20220208024433-611d861089d4 // indirect
-	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.87.1 // indirect
-	github.com/prometheus-operator/prometheus-operator/pkg/client v0.87.1 // indirect
+	github.com/prometheus-operator/prometheus-operator/pkg/apis/monitoring v0.89.0 // indirect
+	github.com/prometheus-operator/prometheus-operator/pkg/client v0.89.0 // indirect
 	github.com/prometheus/client_golang v1.23.2 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.4 // indirect
@@ -214,7 +214,7 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/spf13/viper v1.21.0 // indirect
 	github.com/spiffe/go-spiffe/v2 v2.6.0 // indirect
-	github.com/submariner-io/admiral v0.22.1 // indirect
+	github.com/submariner-io/admiral v0.23.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/sykesm/zap-logfmt v0.0.4 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
@@ -253,10 +253,10 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/apiextensions-apiserver v0.35.0 // indirect
+	k8s.io/apiextensions-apiserver v0.35.2 // indirect
 	k8s.io/cli-runtime v0.35.0 // indirect
 	k8s.io/cloud-provider v0.35.0 // indirect
-	k8s.io/component-base v0.35.0 // indirect
+	k8s.io/component-base v0.35.2 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-aggregator v0.34.2 // indirect
 	k8s.io/kube-openapi v0.0.0-20251125145642-4e65d59e963e // indirect
