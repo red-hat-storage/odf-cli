@@ -43,7 +43,7 @@ var CephPurgeOsdCmd = &cobra.Command{
 			logging.Fatal(errors.Wrapf(err, "failed to check if osd.%s is safe to destroy", osdID))
 		}
 
-		rook.PurgeOsd(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, forceflagValue)
+		rook.PurgeOsds(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, forceflagValue)
 	},
 }
 
