@@ -5,7 +5,7 @@ go 1.25.5
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.21.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.16.0
+	github.com/ramendr/ramenctl v0.17.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.6-0.20260211110206-70e360bafd26
 	github.com/rook/rook v1.19.2
@@ -75,6 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.11 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.3 // indirect
 	github.com/aws/smithy-go v1.24.0 // indirect
+	github.com/aymanbagabas/go-udiff v0.3.1 // indirect
 	github.com/banzaicloud/k8s-objectmatcher v1.8.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
@@ -200,8 +201,8 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.4 // indirect
 	github.com/prometheus/procfs v0.19.2 // indirect
-	github.com/ramendr/ramen/api v0.0.0-20250710152106-9a4f493138c5 // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20250925105626-1e3bf8dbc4d1 // indirect
+	github.com/ramendr/ramen/api v0.0.0-20260302102746-0080ff0b2f30 // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20260303090636-b77204c8e780 // indirect
 	github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rook/rook/pkg/apis v0.0.0-20260210155143-d82f6dee9790 // indirect
