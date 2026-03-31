@@ -8,7 +8,7 @@ require (
 	github.com/ramendr/ramenctl v0.17.0
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.6-0.20260211110206-70e360bafd26
-	github.com/rook/rook v1.19.2
+	github.com/rook/rook v1.19.3
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
 	github.com/submariner-io/submariner v0.23.1
