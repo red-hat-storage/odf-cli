@@ -1,4 +1,4 @@
-package subvolume
+package cephfs_snap
 
 import (
 	"fmt"
@@ -10,56 +10,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var SubvolumeCmd = &cobra.Command{
-	Use:   "subvolume",
-	Short: "Manages subvolumes",
+var CephFSSnapshotCmd = &cobra.Command{
+	Use:   "cephfs-snap",
+	Short: "Manages CephFS snapshots",
 }
 
-var listCmd = &cobra.Command{
+var snapshotListCmd = &cobra.Command{
 	Use:     "ls",
-	Short:   "Print the list of subvolumes.",
-	Example: "odf subvolume ls",
+	Short:   "Print the list of CephFS snapshots.",
+	Example: "odf cephfs-snap ls --filesystem=ocs-storagecluster-cephfilesystem",
 	Run: func(cmd *cobra.Command, args []string) {
-		staleSubvol, _ := cmd.Flags().GetBool("stale")
-		svgName, _ := cmd.Flags().GetString("svg")
-		radosNamespace, _ := cmd.Flags().GetString("rados-namespace")
-		var execCfg *filesystem.CustomExecConfig
-
-		storageClient, _ := cmd.Flags().GetString("storage-client")
-		if storageClient != "" {
-			cfg, err := odffilesystem.ResolveStorageClientConfig(cmd.Context(), root.ClientSets, root.CtrlClient, storageClient, root.StorageClusterNamespace)
-			if err != nil {
-				logging.Fatal(fmt.Errorf("failed to resolve storage client config: %v", err))
-			}
-			svgName = cfg.SVG
-			radosNamespace = cfg.RadosNamespace
-			execCfg = cfg.ExecConfig
-		}
-
-		f := &filesystem.CephFilesystem{
-			Ctx:               cmd.Context(),
-			Clientsets:        root.ClientSets,
-			OperatorNamespace: root.OperatorNamespace,
-			ClusterNamespace:  root.StorageClusterNamespace,
-			RadosNamespace:    radosNamespace,
-			CustomExecConfig:  execCfg,
-		}
-		f.List(svgName, staleSubvol)
-	},
-}
-
-var deleteCmd = &cobra.Command{
-	Use:     "delete",
-	Short:   "Deletes a stale subvolume.",
-	Args:    cobra.RangeArgs(2, 3),
-	Example: "odf subvolume delete <filesystem> <subvolume> [subvolumegroup]",
-	Run: func(cmd *cobra.Command, args []string) {
-		fs := args[0]
-		subvol := args[1]
-		svg := "csi"
-		if len(args) > 2 {
-			svg = args[2]
-		}
+		orphanedOnly, _ := cmd.Flags().GetBool("orphaned")
+		svg, _ := cmd.Flags().GetString("svg")
+		fs, _ := cmd.Flags().GetString("filesystem")
 		radosNamespace, _ := cmd.Flags().GetString("rados-namespace")
 		var execCfg *filesystem.CustomExecConfig
 
@@ -82,15 +45,52 @@ var deleteCmd = &cobra.Command{
 			RadosNamespace:    radosNamespace,
 			CustomExecConfig:  execCfg,
 		}
-		f.Delete(fs, subvol, svg)
+		f.SnapshotList(svg, fs, orphanedOnly)
+	},
+}
+
+var snapshotDeleteCmd = &cobra.Command{
+	Use:     "delete",
+	Short:   "Deletes a CephFS snapshot.",
+	Args:    cobra.ExactArgs(2),
+	Example: "odf cephfs-snap delete <subvol> <snapshot> --filesystem=ocs-storagecluster-cephfilesystem",
+	Run: func(cmd *cobra.Command, args []string) {
+		subvol := args[0]
+		snap := args[1]
+		fs, _ := cmd.Flags().GetString("filesystem")
+		svg, _ := cmd.Flags().GetString("svg")
+		radosNamespace, _ := cmd.Flags().GetString("rados-namespace")
+		var execCfg *filesystem.CustomExecConfig
+
+		storageClient, _ := cmd.Flags().GetString("storage-client")
+		if storageClient != "" {
+			cfg, err := odffilesystem.ResolveStorageClientConfig(cmd.Context(), root.ClientSets, root.CtrlClient, storageClient, root.StorageClusterNamespace)
+			if err != nil {
+				logging.Fatal(fmt.Errorf("failed to resolve storage client config: %v", err))
+			}
+			svg = cfg.SVG
+			radosNamespace = cfg.RadosNamespace
+			execCfg = cfg.ExecConfig
+		}
+
+		f := &filesystem.CephFilesystem{
+			Ctx:               cmd.Context(),
+			Clientsets:        root.ClientSets,
+			OperatorNamespace: root.OperatorNamespace,
+			ClusterNamespace:  root.StorageClusterNamespace,
+			RadosNamespace:    radosNamespace,
+			CustomExecConfig:  execCfg,
+		}
+		f.SnapshotDelete(fs, subvol, snap, svg)
 	},
 }
 
 func init() {
-	SubvolumeCmd.AddCommand(listCmd)
-	SubvolumeCmd.PersistentFlags().Bool("stale", false, "Only list stale subvolumes")
-	SubvolumeCmd.PersistentFlags().String("svg", "csi", "The name of the subvolume group")
-	SubvolumeCmd.PersistentFlags().String("rados-namespace", "csi", "The rados namespace for omap operations")
-	SubvolumeCmd.PersistentFlags().String("storage-client", "", "StorageClient CR name to auto-resolve SVG, rados-namespace, and exec config")
-	SubvolumeCmd.AddCommand(deleteCmd)
+	CephFSSnapshotCmd.AddCommand(snapshotListCmd)
+	snapshotListCmd.Flags().Bool("orphaned", false, "List only orphaned snapshots")
+	CephFSSnapshotCmd.PersistentFlags().String("svg", "csi", "The name of the subvolume group")
+	CephFSSnapshotCmd.PersistentFlags().String("filesystem", "ocs-storagecluster-cephfilesystem", "The name of the CephFS filesystem")
+	CephFSSnapshotCmd.PersistentFlags().String("rados-namespace", "csi", "The rados namespace for omap operations")
+	CephFSSnapshotCmd.PersistentFlags().String("storage-client", "", "StorageClient CR name to auto-resolve SVG, rados-namespace, and exec config")
+	CephFSSnapshotCmd.AddCommand(snapshotDeleteCmd)
 }
