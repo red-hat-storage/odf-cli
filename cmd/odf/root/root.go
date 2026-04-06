@@ -13,6 +13,7 @@ import (
 	"github.com/spf13/cobra"
 	submarinerv1alpha1 "github.com/submariner-io/submariner-operator/api/v1alpha1"
 	submarinerv1 "github.com/submariner-io/submariner/pkg/apis/submariner.io/v1"
+	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/dynamic"
@@ -27,6 +28,7 @@ var (
 	OperatorNamespace       string
 	StorageClusterNamespace string
 	ClientSets              *k8sutil.Clientsets
+	APIExtensions           apiextensionsclient.Interface
 	CtrlClient              ctrl.Client
 	scheme                  = runtime.NewScheme()
 )
@@ -77,8 +79,14 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&KubeContext, "context", "", "Openshift context to use")
 }
 
-func isBenchmarkCommand(cmd *cobra.Command) bool {
-	// Check if the command itself is "benchmark" or if its parent is "benchmark"
+func skipPreValidation(cmd *cobra.Command) bool {
+	// Skip pre-validation for cluster-wide commands.
+	if cmd.Use == "enable" || cmd.Use == "disable" {
+		if cmd.Parent() != nil && cmd.Parent().Use == "object" {
+			return true
+		}
+	}
+
 	return cmd.Use == "benchmark" || (cmd.Parent() != nil && cmd.Parent().Use == "benchmark")
 }
 
@@ -126,7 +134,12 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	clientsets.ConsumerConfig = clientsets.KubeConfig
 	clientsets.ConsumerKube = clientsets.Kube
 
-	if !isBenchmarkCommand(cmd) {
+	APIExtensions, err = apiextensionsclient.NewForConfig(clientsets.KubeConfig)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to create apiextensions client: %w", err))
+	}
+
+	if !skipPreValidation(cmd) {
 		preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
 	}
 

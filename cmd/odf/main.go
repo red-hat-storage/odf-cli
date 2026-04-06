@@ -9,6 +9,7 @@ import (
 	"github.com/red-hat-storage/odf-cli/cmd/odf/maintenance"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/multus"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/noobaa"
+	"github.com/red-hat-storage/odf-cli/cmd/odf/object"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/operator"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/purgeosd"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/restore"
@@ -43,6 +44,7 @@ func addcommands() {
 		ceph.RadosCmd,
 		dr.DrCmd,
 		benchmark.BenchmarkCmd,
+		object.ObjectCmd,
 		noobaa.NoobaaCmd,
 	)
 }
