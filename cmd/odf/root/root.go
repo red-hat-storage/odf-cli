@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	csiv1 "github.com/ceph/ceph-csi-operator/api/v1"
+	ocsclientv1alpha1 "github.com/red-hat-storage/ocs-client-operator/api/v1alpha1"
 	ocsv1 "github.com/red-hat-storage/ocs-operator/api/v4/v1"
 	"github.com/rook/kubectl-rook-ceph/pkg/k8sutil"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
@@ -59,6 +61,12 @@ func init() {
 	if err := submarinerv1alpha1.AddToScheme(scheme); err != nil {
 		logging.Fatal(err)
 	}
+	if err := csiv1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
+	if err := ocsclientv1alpha1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
 
 	// Hide autocompletion command
 	RootCmd.CompletionOptions.DisableDefaultCmd = true
@@ -85,8 +93,12 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	}
 
 	// 1. Create Kubernetes Client
+	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
+	if KubeConfig != "" {
+		loadingRules.ExplicitPath = KubeConfig
+	}
 	kubeconfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
-		clientcmd.NewDefaultClientConfigLoadingRules(),
+		loadingRules,
 		congfigOverride,
 	)
 
@@ -109,6 +121,11 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	if err != nil {
 		logging.Fatal(err)
 	}
+
+	// Default consumer clients to same cluster (no separate consumer context in odf-cli)
+	clientsets.ConsumerConfig = clientsets.KubeConfig
+	clientsets.ConsumerKube = clientsets.Kube
+
 	if !isBenchmarkCommand(cmd) {
 		preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
 	}

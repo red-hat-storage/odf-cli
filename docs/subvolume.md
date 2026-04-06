@@ -8,59 +8,73 @@ and delete them without impacting other resources and attached volumes.
 
 The subvolume command supports the following sub commands:
 
-* [ls](#ls)
-* [delete](#delete)
+* `ls` : [ls](#ls) lists all the subvolumes. Supported flags are listed below.
+  * `--stale`: lists only stale subvolumes
+  * `--svg <subvolumegroupname>`: lists subvolumes in a particular subvolume group (default is "csi")
+  * `--rados-namespace <namespace>`: rados namespace used for OMAP lookups (default is "csi")
+  * `--storage-client <name>`: StorageClient CR name to auto-resolve SVG, rados-namespace, and exec config
+* `delete <filesystem> <subvolume> [subvolumegroup]`:
+    [delete](#delete) a stale subvolume. Supported args and flags are listed below.
+  * filesystem: the name of the CephFS filesystem.
+  * subvolume: subvolume name.
+  * subvolumegroup: subvolumegroup name to which the subvolume belongs (default is "csi")
+  * `--rados-namespace <namespace>`: rados namespace used for OMAP lookups (default is "csi")
+  * `--storage-client <name>`: StorageClient CR name to auto-resolve SVG, rados-namespace, and exec config
 
 ## ls
 
-This command will lists all the subvolumes. It also accepts the stale flag to check for stale subvolumes.
-
-* `--stale`: lists only stale subvolumes
-* `--svg <subvolumegroupname`: lists subvolumes in a particular subvolume(default is "csi")
-
 ```bash
-odf subvolume ls
+$ odf subvolume ls
 
-# Filesystem  Subvolume Subvolumegroup State
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110004 csi
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110005 csi
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110006 csi
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110007 stale
+Filesystem                         Subvolume                                     SubvolumeGroup  State
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110004  csi             in-use
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110005  csi             in-use
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110006  csi             stale
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110007  csi             stale-with-snapshot
 ```
 
 ```bash
-odf subvolume ls --stale
+$ odf subvolume ls --stale
 
-# Filesystem  Subvolume Subvolumegroup State
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110004 csi stale
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110005 csi stale
+Filesystem                         Subvolume                                     SubvolumeGroup  State
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110006  csi             stale
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110007  csi             stale-with-snapshot
 ```
 
 ```bash
-odf subvolume ls --svg svg01
+$ odf subvolume ls --svg svg01
 
-# Filesystem  Subvolume Subvolumegroup State
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110005 svg01 in-use
-# ocs-storagecluster-cephfilesystem csi-vol-427774b4-340b-11ed-8d66-0242ac110007 svg01 stale
+Filesystem                         Subvolume                                     SubvolumeGroup  State
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110005  svg01           in-use
+ocs-storagecluster-cephfilesystem  csi-vol-427774b4-340b-11ed-8d66-0242ac110007  svg01           stale
+```
+
+### StorageClient
+
+When using a StorageClient CR, pass `--storage-client` to auto-resolve the SVG, rados-namespace, and exec config:
+
+```bash
+$ odf subvolume ls --storage-client my-storage-client
 ```
 
 ## delete
 
-This command deletes stale subvolumes after user's confirmation.
-`delete <subvolumes> <filesystem> <subvolumegroup>`:
-It will delete only the stale subvolumes to prevent any loss of data.
-
-* subvolumes: comma-separated list of subvolumes of same filesystem and subvolumegroup.
-
 ```bash
-odf subvolume delete csi-vol-427774b4-340b-11ed-8d66-0242ac110004 ocs-storagecluster csi
+$ odf subvolume delete csi-vol-427774b4-340b-11ed-8d66-0242ac110005
 
-# Info: subvolume csi-vol-427774b4-340b-11ed-8d66-0242ac110004 deleted
+Info: Deleting the omap object and key for subvolume "csi-vol-427774b4-340b-11ed-8d66-0242ac110005"
+Info: omap object:"csi.volume.427774b4-340b-11ed-8d66-0242ac110005" deleted
+Info: omap key:"csi.volume.pvc-78abf81c-5381-42ee-8d75-dc17cd0cf5de" deleted
+Info: subvolume "csi-vol-427774b4-340b-11ed-8d66-0242ac110005" deleted
 ```
 
-```bash
-odf subvolume delete csi-vol-427774b4-340b-11ed-8d66-0242ac110004,csi-vol-427774b4-340b-11ed-8d66-0242ac110005 ocs-storagecluster csi
+To delete using a custom rados namespace:
 
-# Info: subvolume csi-vol-427774b4-340b-11ed-8d66-0242ac110004 deleted
-# Info: subvolume csi-vol-427774b4-340b-11ed-8d66-0242ac110004 deleted
+```bash
+$ odf subvolume delete csi-vol-427774b4-340b-11ed-8d66-0242ac110005 svg01 --rados-namespace=svg01
+
+Info: Deleting the omap object and key for subvolume "csi-vol-427774b4-340b-11ed-8d66-0242ac110005"
+Info: omap object:"csi.volume.427774b4-340b-11ed-8d66-0242ac110005" deleted
+Info: omap key:"csi.volume.pvc-78abf81c-5381-42ee-8d75-dc17cd0cf5de" deleted
+Info: subvolume "csi-vol-427774b4-340b-11ed-8d66-0242ac110005" deleted
 ```
