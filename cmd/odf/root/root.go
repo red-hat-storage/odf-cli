@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	csiv1 "github.com/ceph/ceph-csi-operator/api/v1"
+	ocsclientv1alpha1 "github.com/red-hat-storage/ocs-client-operator/api/v1alpha1"
 	ocsv1 "github.com/red-hat-storage/ocs-operator/api/v4/v1"
 	"github.com/rook/kubectl-rook-ceph/pkg/k8sutil"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
@@ -11,6 +13,7 @@ import (
 	"github.com/spf13/cobra"
 	submarinerv1alpha1 "github.com/submariner-io/submariner-operator/api/v1alpha1"
 	submarinerv1 "github.com/submariner-io/submariner/pkg/apis/submariner.io/v1"
+	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/dynamic"
@@ -25,6 +28,7 @@ var (
 	OperatorNamespace       string
 	StorageClusterNamespace string
 	ClientSets              *k8sutil.Clientsets
+	APIExtensions           apiextensionsclient.Interface
 	CtrlClient              ctrl.Client
 	scheme                  = runtime.NewScheme()
 )
@@ -59,6 +63,12 @@ func init() {
 	if err := submarinerv1alpha1.AddToScheme(scheme); err != nil {
 		logging.Fatal(err)
 	}
+	if err := csiv1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
+	if err := ocsclientv1alpha1.AddToScheme(scheme); err != nil {
+		logging.Fatal(err)
+	}
 
 	// Hide autocompletion command
 	RootCmd.CompletionOptions.DisableDefaultCmd = true
@@ -69,8 +79,14 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&KubeContext, "context", "", "Openshift context to use")
 }
 
-func isBenchmarkCommand(cmd *cobra.Command) bool {
-	// Check if the command itself is "benchmark" or if its parent is "benchmark"
+func skipPreValidation(cmd *cobra.Command) bool {
+	// Skip pre-validation for cluster-wide commands.
+	if cmd.Use == "enable" || cmd.Use == "disable" {
+		if cmd.Parent() != nil && cmd.Parent().Use == "object" {
+			return true
+		}
+	}
+
 	return cmd.Use == "benchmark" || (cmd.Parent() != nil && cmd.Parent().Use == "benchmark")
 }
 
@@ -85,8 +101,12 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	}
 
 	// 1. Create Kubernetes Client
+	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
+	if KubeConfig != "" {
+		loadingRules.ExplicitPath = KubeConfig
+	}
 	kubeconfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
-		clientcmd.NewDefaultClientConfigLoadingRules(),
+		loadingRules,
 		congfigOverride,
 	)
 
@@ -109,7 +129,17 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	if err != nil {
 		logging.Fatal(err)
 	}
-	if !isBenchmarkCommand(cmd) {
+
+	// Default consumer clients to same cluster (no separate consumer context in odf-cli)
+	clientsets.ConsumerConfig = clientsets.KubeConfig
+	clientsets.ConsumerKube = clientsets.Kube
+
+	APIExtensions, err = apiextensionsclient.NewForConfig(clientsets.KubeConfig)
+	if err != nil {
+		logging.Fatal(fmt.Errorf("failed to create apiextensions client: %w", err))
+	}
+
+	if !skipPreValidation(cmd) {
 		preValidationCheck(ctx, clientsets, OperatorNamespace, StorageClusterNamespace)
 	}
 
