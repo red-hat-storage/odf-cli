@@ -2566,8 +2566,8 @@ github.com/ramendr/ramen/api v0.0.0-20260302102746-0080ff0b2f30 h1:q6ci5ht39oiDf
 github.com/ramendr/ramen/api v0.0.0-20260302102746-0080ff0b2f30/go.mod h1:G3q4wmHUdOVefjCKSacg3McDodLwtfFe84wSrGxQ69w=
 github.com/ramendr/ramen/e2e v0.0.0-20260303090636-b77204c8e780 h1:6TJ2D6N8sfFYWXXTyzkLQg7nBFu0yNYZdGmnRkhcOOU=
 github.com/ramendr/ramen/e2e v0.0.0-20260303090636-b77204c8e780/go.mod h1:BhAPwG+WRu/nJ3Qr9BM+pEMNu6N4QYGftCczD8QWsHk=
-github.com/ramendr/ramenctl v0.18.0 h1:fh9GepH+x2pfl3nNMBpmK+kqajIciHDFBTF8pDqn80g=
-github.com/ramendr/ramenctl v0.18.0/go.mod h1:cqPXruupu0efTOk6gORvxexLvtSz+OA1e0+dWuGOhKA=
+github.com/ramendr/ramenctl v0.19.0 h1:18kz+0Hos0g30jXq024mtxOEcfgiQcHSQcJEnZhGHeE=
+github.com/ramendr/ramenctl v0.19.0/go.mod h1:cqPXruupu0efTOk6gORvxexLvtSz+OA1e0+dWuGOhKA=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 h1:QRcHe6GTJAgLK7zgF6ivwZ6B0SFe1tONbA7VMQMWjMM=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567/go.mod h1:dGXrk743fq6VG8u6lflEce7ITM7d/9xSBeAbI2RXl9s=
 github.com/red-hat-storage/ocs-client-operator/api v0.0.0-20260331224201-4379cf15edad h1:+WpGnLYj2/XpiONyCmncIxo6O+/KqCoJOh62dWaVPks=
