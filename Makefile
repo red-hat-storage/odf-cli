@@ -1,5 +1,5 @@
-# noobaa-operator git tag for OB/OBC CRDs (keep in sync with EmbeddedNoobaaOperatorVersion in pkg/noobaa/crds.go).
-NOOBAA_OPERATOR_VERSION ?= v5.21.0
+# noobaa-operator git tag or branch for OB/OBC CRDs
+NOOBAA_OPERATOR_VERSION ?= 5.22
 
 build: gen-noobaa-crds
 	find . -type f -name '*.go' -print0 | xargs -0 gofmt -w

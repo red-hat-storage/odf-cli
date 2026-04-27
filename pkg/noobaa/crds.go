@@ -13,9 +13,6 @@ import (
 	"sigs.k8s.io/yaml"
 )
 
-// EmbeddedNoobaaOperatorVersion is the noobaa-operator release version.
-const EmbeddedNoobaaOperatorVersion = "v5.21.0"
-
 //go:embed crds/*.yaml
 var embeddedCRDs embed.FS
 
