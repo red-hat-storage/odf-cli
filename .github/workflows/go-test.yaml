@@ -72,12 +72,7 @@ jobs:
         run: make test
 
       - name: Test odf-cli commands
-        shell: bash
-        run: |
-          ./bin/odf --help
-          ./bin/odf get health
-          ./bin/odf ceph status
-          ./bin/odf get rook-status
+        run: tests/github-action-helper.sh test_odf_commands
 
       - name: collect common logs
         if: always()
