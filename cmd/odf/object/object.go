@@ -20,7 +20,7 @@ var ObjectCmd = &cobra.Command{
 }
 
 var enableCmd = &cobra.Command{
-	Use:       "enable",
+	Use:       fmt.Sprintf("enable %s", remoteOBCArg),
 	Short:     "Install the ObjectBucket and ObjectBucketClaim CRDs",
 	Example:   fmt.Sprintf("odf object enable %s", remoteOBCArg),
 	Args:      cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
@@ -31,7 +31,7 @@ var enableCmd = &cobra.Command{
 }
 
 var disableCmd = &cobra.Command{
-	Use:       "disable",
+	Use:       fmt.Sprintf("disable %s", remoteOBCArg),
 	Short:     "Remove the ObjectBucket and ObjectBucketClaim CRDs",
 	Example:   fmt.Sprintf("odf object disable %s", remoteOBCArg),
 	Args:      cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
