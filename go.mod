@@ -6,7 +6,7 @@ require (
 	github.com/ceph/ceph-csi-operator/api v0.0.0-20260330085655-5fad4eb859fb
 	github.com/noobaa/noobaa-operator/v5 v5.21.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.19.0
+	github.com/ramendr/ramenctl v0.20.0
 	github.com/red-hat-storage/ocs-client-operator/api v0.0.0-20260331224201-4379cf15edad
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.6
