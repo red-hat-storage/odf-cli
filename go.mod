@@ -9,7 +9,7 @@ require (
 	github.com/ramendr/ramenctl v0.19.0
 	github.com/red-hat-storage/ocs-client-operator/api v0.0.0-20260331224201-4379cf15edad
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
-	github.com/rook/kubectl-rook-ceph v0.9.6
+	github.com/rook/kubectl-rook-ceph v0.9.7-0.20260429175457-6245c7127df2
 	github.com/rook/rook v1.19.4
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
