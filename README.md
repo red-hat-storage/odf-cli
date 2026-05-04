@@ -22,9 +22,13 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `start <deployment-name>`
     - `[--alternate-image <alternate-image>]` : (optional) Start a maintenance deployment with an optional alternative ceph container image
   - `stop <deployment-name>`: Stop the maintenance deployment and restore the mon or OSD deployment
-- `odf subvolume`:
-  - `ls`: Display all the subvolumes
-  - `delete <subvolume> <filesystem> <subvolumegroup>`: Deletes the stale subvolumes
+- `odf subvolume` :
+  - `ls [--stale] [--svg <group>]` : List all subvolumes and their state (in-use, stale, stale-with-snapshot).
+  - `delete <filesystem> <subvolume> [subvolumegroup]` : Delete a stale subvolume and its OMAP metadata.
+
+- `odf cephfs-snap` :
+  - `ls [--orphaned] [--filesystem <fs>] [--svg <group>]` : List all snapshots and their state (bound, orphaned).
+  - `delete <subvolume> <snapshot> [--svg <group>]` : Delete an orphaned snapshot and its OMAP metadata.
 - `odf operator`:
   - `rook`:
     - `set`: Set the property in the rook-ceph-operator-config configmap.
@@ -69,6 +73,8 @@ Visit docs below for complete details about each command and their flags uses.
 - [dr](docs/dr.md)
 - [noobaa](docs/noobaa.md)
 - [object](docs/object.md)
+- [subvolume](docs/subvolume.md)
+- [cephfs-snap](docs/cephfs-snap.md)
 
 ### Root args
 
