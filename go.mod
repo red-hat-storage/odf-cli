@@ -5,7 +5,6 @@ go 1.23.1
 toolchain go1.23.7
 
 require (
-	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/pkg/errors v0.9.1
 	github.com/rook/kubectl-rook-ceph v0.8.1-0.20240327033245-3f07e9fd3059
 	github.com/rook/rook v1.14.8
@@ -20,7 +19,7 @@ require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/emicklei/go-restful/v3 v3.12.0 // indirect
 	github.com/fatih/color v1.16.0 // indirect
-	github.com/go-jose/go-jose/v3 v3.0.3 // indirect
+	github.com/go-jose/go-jose/v3 v3.0.5 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
