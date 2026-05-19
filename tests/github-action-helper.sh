@@ -188,6 +188,92 @@ wait_for_operator_pod_to_be_ready_state() {
     kubectl wait --for=condition=Ready pod -l app=rook-ceph-operator -n "$operator_ns" --timeout=${DEFAULT_TIMEOUT}s
 }
 
+##################
+# TEST FUNCTIONS #
+##################
+
+ODF_CLI_BIN="${ODF_CLI_BIN:-./bin/odf}"
+
+# Runs a command and verifies the output contains an expected pattern.
+# Usage: assert_output_contains <description> <grep_pattern> <command> [args...]
+assert_output_contains() {
+    local description="$1"
+    local pattern="$2"
+    shift 2
+
+    echo "--- TEST: $description ---"
+    local output
+    output=$("$@" 2>&1)
+
+    if echo "$output" | grep -qE "$pattern"; then
+        echo "PASS: $description"
+        echo "$output"
+    else
+        echo "FAIL: $description"
+        echo "  Expected pattern: $pattern"
+        echo "  Actual output:"
+        echo "$output"
+        return 1
+    fi
+    echo ""
+}
+
+test_odf_commands() {
+    echo "=== Running odf-cli command tests ==="
+
+    assert_output_contains \
+        "odf --help" \
+        "Available Commands:" \
+        "$ODF_CLI_BIN" --help
+
+    assert_output_contains \
+        "odf get health" \
+        "HEALTH_OK|HEALTH_WARN" \
+        "$ODF_CLI_BIN" get health
+
+    assert_output_contains \
+        "odf ceph status" \
+        "cluster:|health:|services:" \
+        "$ODF_CLI_BIN" ceph status
+
+    assert_output_contains \
+        "odf get rook status" \
+        "Phase|Condition|Ready" \
+        "$ODF_CLI_BIN" get rook status
+
+    assert_output_contains \
+        "odf get mon-endpoints" \
+        ":[0-9]+" \
+        "$ODF_CLI_BIN" get mon-endpoints
+
+    assert_output_contains \
+        "odf ceph osd tree" \
+        "ID.*CLASS.*WEIGHT.*TYPE.*NAME" \
+        "$ODF_CLI_BIN" ceph osd tree
+
+    assert_output_contains \
+        "odf ceph df" \
+        "RAW STORAGE" \
+        "$ODF_CLI_BIN" ceph df
+
+    assert_output_contains \
+        "odf ceph osd status" \
+        "ID.*HOST.*USED.*AVAIL" \
+        "$ODF_CLI_BIN" ceph osd status
+
+    assert_output_contains \
+        "odf rados df" \
+        "POOL_NAME.*USED.*OBJECTS" \
+        "$ODF_CLI_BIN" rados df
+
+    assert_output_contains \
+        "odf rbd ls replicapool" \
+        "^$|rbd" \
+        "$ODF_CLI_BIN" rbd ls replicapool
+
+    echo "=== All odf-cli command tests passed ==="
+}
+
 ########
 # MAIN #
 ########
