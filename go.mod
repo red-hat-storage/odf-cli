@@ -1,8 +1,6 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.24.3
-
-toolchain go1.24.12
+go 1.24.13
 
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.0.0-20250521095853-8e707efa8da5
@@ -74,7 +72,7 @@ require (
 	github.com/gemalto/flume v0.13.1 // indirect
 	github.com/gemalto/kmip-go v0.0.10 // indirect
 	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32 // indirect
-	github.com/go-jose/go-jose/v4 v4.1.3 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-logr/zapr v1.3.0 // indirect
