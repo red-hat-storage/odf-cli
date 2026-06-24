@@ -1,6 +1,6 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.25.5
+go 1.26.3
 
 require (
 	github.com/ceph/ceph-csi-operator/api v0.0.0-20260330085655-5fad4eb859fb
