@@ -22,7 +22,7 @@ jobs:
       ODF_SKIP_PROMPTS: true
     steps:
       - name: checkout
-        uses: actions/checkout@v6.0.3
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
 
