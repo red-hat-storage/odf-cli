@@ -5,7 +5,6 @@ go 1.23.1
 toolchain go1.23.7
 
 require (
-	github.com/golang-jwt/jwt/v4 v4.5.2
 	github.com/pkg/errors v0.9.1
 	github.com/rook/kubectl-rook-ceph v0.6.1-0.20231211183203-70ede2704719
 	github.com/rook/rook v1.12.8
@@ -61,7 +60,7 @@ require (
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	github.com/moby/spdystream v0.2.0 // indirect
+	github.com/moby/spdystream v0.5.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
