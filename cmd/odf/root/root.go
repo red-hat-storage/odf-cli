@@ -11,6 +11,7 @@ import (
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
 	rookclient "github.com/rook/rook/pkg/client/clientset/versioned"
 	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	submarinerv1alpha1 "github.com/submariner-io/submariner-operator/api/v1alpha1"
 	submarinerv1 "github.com/submariner-io/submariner/pkg/apis/submariner.io/v1"
 	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
@@ -18,18 +19,19 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/dynamic"
 	k8s "k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
+	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 var (
-	KubeConfig              string
-	KubeContext             string
 	OperatorNamespace       string
-	StorageClusterNamespace string
+	StorageClusterNamespace = "openshift-storage"
 	ClientSets              *k8sutil.Clientsets
 	APIExtensions           apiextensionsclient.Interface
 	CtrlClient              ctrl.Client
+	clientConfig            clientcmd.ClientConfig
 	scheme                  = runtime.NewScheme()
 )
 
@@ -39,6 +41,13 @@ var RootCmd = &cobra.Command{
 	Short:            "Management and troubleshooting tools for ODF clusters.",
 	TraverseChildren: true,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		effectiveNamespace, _, err := clientConfig.Namespace()
+		if err != nil {
+			logging.Warning("failed to determine namespace from client config, defaulting to %q: %v", StorageClusterNamespace, err)
+		} else {
+			StorageClusterNamespace = effectiveNamespace
+		}
+
 		if StorageClusterNamespace != "" && OperatorNamespace == "" {
 			OperatorNamespace = StorageClusterNamespace
 		}
@@ -73,10 +82,54 @@ func init() {
 	// Hide autocompletion command
 	RootCmd.CompletionOptions.DisableDefaultCmd = true
 
-	RootCmd.PersistentFlags().StringVar(&KubeConfig, "kubeconfig", "", "Openshift config path")
+	clientConfig = defaultClientConfig(RootCmd.PersistentFlags())
 	RootCmd.PersistentFlags().StringVar(&OperatorNamespace, "operator-namespace", "", "Openshift namespace where the ODF operator is running")
-	RootCmd.PersistentFlags().StringVarP(&StorageClusterNamespace, "namespace", "n", "openshift-storage", "Openshift namespace where the StorageCluster CR is created")
-	RootCmd.PersistentFlags().StringVar(&KubeContext, "context", "", "Openshift context to use")
+}
+
+func defaultClientConfig(flags *pflag.FlagSet) clientcmd.ClientConfig {
+	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
+	overrides := &clientcmd.ConfigOverrides{}
+	clientcmd.BindOverrideFlags(overrides, flags, clientcmd.RecommendedConfigOverrideFlags(""))
+	flags.StringVar(&loadingRules.ExplicitPath, "kubeconfig", "", "Path to the kubeconfig file to use for CLI requests")
+
+	if namespaceFlag := flags.Lookup("namespace"); namespaceFlag != nil {
+		namespaceFlag.Usage = "If present, the namespace scope for this CLI request (defaults to 'openshift-storage')"
+	}
+
+	baseConfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
+		loadingRules,
+		overrides,
+	)
+
+	return &namespacedClientConfig{base: baseConfig}
+}
+
+type namespacedClientConfig struct {
+	base clientcmd.ClientConfig
+}
+
+func (c *namespacedClientConfig) RawConfig() (clientcmdapi.Config, error) {
+	return c.base.RawConfig()
+}
+
+func (c *namespacedClientConfig) ClientConfig() (*rest.Config, error) {
+	return c.base.ClientConfig()
+}
+
+func (c *namespacedClientConfig) Namespace() (string, bool, error) {
+	baseNs, overridden, err := c.base.Namespace()
+	if err != nil {
+		return "", false, err
+	}
+	if overridden {
+		return baseNs, true, nil
+	}
+
+	return StorageClusterNamespace, false, nil
+}
+
+func (c *namespacedClientConfig) ConfigAccess() clientcmd.ConfigAccess {
+	return c.base.ConfigAccess()
 }
 
 func skipPreValidation(cmd *cobra.Command) bool {
@@ -95,22 +148,7 @@ func getClientsets(cmd *cobra.Command) *k8sutil.Clientsets {
 	ctx := cmd.Context()
 	clientsets := &k8sutil.Clientsets{}
 
-	congfigOverride := &clientcmd.ConfigOverrides{}
-	if KubeContext != "" {
-		congfigOverride = &clientcmd.ConfigOverrides{CurrentContext: KubeContext}
-	}
-
-	// 1. Create Kubernetes Client
-	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
-	if KubeConfig != "" {
-		loadingRules.ExplicitPath = KubeConfig
-	}
-	kubeconfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
-		loadingRules,
-		congfigOverride,
-	)
-
-	clientsets.KubeConfig, err = kubeconfig.ClientConfig()
+	clientsets.KubeConfig, err = clientConfig.ClientConfig()
 	if err != nil {
 		logging.Fatal(err)
 	}
