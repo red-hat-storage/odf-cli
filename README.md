@@ -86,23 +86,45 @@ These are the arguments that apply to all commands:
     odf -h
     ```
 
-- `-n|--namespace='openshift-storage'`: the Openshift namespace in which the StorageCluster resides. (optional,  default: openshift-storage)
+- `-n|--namespace='openshift-storage'`: the Openshift namespace in which the StorageCluster resides. (optional, default: openshift-storage)
 
     ```bash
     odf -n test-cluster [commands]
     ```
 
-- `-o|--operator-namespace` : the Openshift namespace in which the rook operator resides, when the arg `-n` is passed but `-o` is not then `-o` will equal to the `-n`. (default: openshift-storage)
+- `--operator-namespace`: the Openshift namespace in which the rook operator resides. When `-n|--namespace` is passed but `--operator-namespace` is not, `--operator-namespace` will equal `-n|--namespace`. (default: openshift-storage)
 
     ```bash
     odf --operator-namespace test-operator -n test-cluster [commands]
     ```
 
-- `--context`: the name of the Openshift context to be used (optional).
+ODF CLI also supports standard kubectl client override flags for all commands, including:
 
-    ```bash
-    odf --context=$(oc config current-context) [commands]
-    ```
+- `--as`: username to impersonate for the operation.
+- `--as-group`: group to impersonate for the operation. This flag can be repeated to specify multiple groups.
+- `--as-uid`: UID to impersonate for the operation.
+- `--certificate-authority`: path to a cert file for the certificate authority.
+- `--client-certificate`: path to a client certificate file for TLS.
+- `--client-key`: path to a client key file for TLS.
+- `--cluster`: the name of the kubeconfig cluster to use.
+- `--context`: the name of the kubeconfig context to use.
+- `--disable-compression`: opt out of response compression for all requests to the server.
+- `--insecure-skip-tls-verify`: skip server certificate validity checks.
+- `--kubeconfig`: path to the kubeconfig file to use for CLI requests.
+- `--password`: password for basic authentication to the API server.
+- `--proxy-url`: proxy URL to use for API server requests.
+- `--request-timeout`: timeout for a single server request.
+- `--server`: address and port of the Kubernetes API server.
+- `--tls-server-name`: server name to use for certificate validation.
+- `--token`: bearer token for authentication to the API server.
+- `--user`: the name of the kubeconfig user to use.
+- `--username`: username for basic authentication to the API server.
+
+For example, use Kubernetes impersonation when running an ODF CLI command:
+
+```bash
+odf --as alice --as-group developers get health
+```
 
 ## Installation
 
