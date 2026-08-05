@@ -8,12 +8,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	healthVerbose bool
+	healthOutput  string
+)
+
 var clusterHealth = &cobra.Command{
-	Use:                "health",
-	Short:              "check health of the cluster and common configuration issues",
-	DisableFlagParsing: true,
-	Args:               cobra.NoArgs,
-	Example:            "odf get health",
+	Use:     "health",
+	Short:   "check health of the cluster and common configuration issues",
+	Args:    cobra.NoArgs,
+	Example: "odf get health",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		// verify operator pod is running
 		if _, err := k8sutil.WaitForPodToRun(cmd.Context(), root.ClientSets.Kube, root.OperatorNamespace, "app=rook-ceph-operator"); err != nil {
@@ -21,6 +25,11 @@ var clusterHealth = &cobra.Command{
 		}
 	},
 	Run: func(cmd *cobra.Command, _ []string) {
-		health.Health(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace)
+		health.Health(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, healthVerbose, "", healthOutput)
 	},
+}
+
+func init() {
+	clusterHealth.Flags().BoolVar(&healthVerbose, "verbose", false, "shows detailed check for pods")
+	clusterHealth.Flags().StringVarP(&healthOutput, "output", "o", "text", "output format: text, json, yaml")
 }
