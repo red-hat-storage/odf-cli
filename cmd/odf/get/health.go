@@ -2,6 +2,7 @@ package get
 
 import (
 	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
+	odfhealth "github.com/red-hat-storage/odf-cli/pkg/health"
 	"github.com/rook/kubectl-rook-ceph/pkg/health"
 	"github.com/rook/kubectl-rook-ceph/pkg/k8sutil"
 	"github.com/rook/kubectl-rook-ceph/pkg/logging"
@@ -25,7 +26,15 @@ var clusterHealth = &cobra.Command{
 		}
 	},
 	Run: func(cmd *cobra.Command, _ []string) {
-		health.Health(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, healthVerbose, "", healthOutput)
+		customChecks := []health.HealthChecker{
+			&odfhealth.NooBaaHealthChecker{
+				Ctx:              cmd.Context(),
+				DynamicClient:    root.ClientSets.Dynamic,
+				K8sClient:        root.ClientSets.Kube,
+				ClusterNamespace: root.StorageClusterNamespace,
+			},
+		}
+		health.Health(cmd.Context(), root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, healthVerbose, "", healthOutput, customChecks)
 	},
 }
 
