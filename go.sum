@@ -4145,8 +4145,8 @@ github.com/ramendr/ramen/api v0.0.0-20260708142616-0e17c0d9913e h1:FZoq+A+9bjPYB
 github.com/ramendr/ramen/api v0.0.0-20260708142616-0e17c0d9913e/go.mod h1:OcpEzl0uLzjiZ4WiYEhWND5oCqxekFfbLZ2MRlodLMI=
 github.com/ramendr/ramen/e2e v0.0.0-20260708142616-0e17c0d9913e h1:6Ltp1S+cFmVltBk66Bl23X+dyCeFSrLyvcLTupYZZ8s=
 github.com/ramendr/ramen/e2e v0.0.0-20260708142616-0e17c0d9913e/go.mod h1:S/3Q5edMqSZtE09pbGIh5SoOqY4EoAZAswKmhgA7Jsc=
-github.com/ramendr/ramenctl v0.24.0 h1:Xf9r8TQoDHl3LyCpM+54SZ+NWv3UGJxDKZOwUcTLxLM=
-github.com/ramendr/ramenctl v0.24.0/go.mod h1:D2jCRokzA3Hmf1oBoxJsJNJcIZ45Qb3cLMn+DNNLF1k=
+github.com/ramendr/ramenctl v0.25.0 h1:cp6YqOL0YQauChnTomFcU7l5vix/iySw21QNaldXvcs=
+github.com/ramendr/ramenctl v0.25.0/go.mod h1:D2jCRokzA3Hmf1oBoxJsJNJcIZ45Qb3cLMn+DNNLF1k=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 h1:QRcHe6GTJAgLK7zgF6ivwZ6B0SFe1tONbA7VMQMWjMM=
 github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567/go.mod h1:dGXrk743fq6VG8u6lflEce7ITM7d/9xSBeAbI2RXl9s=
 github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a/go.mod h1:bCqnVzQkZxMG4s8nGwiZ5l3QUCyqpo9Y+/ZMZ9VjZe4=
