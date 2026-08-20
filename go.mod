@@ -1,6 +1,6 @@
 module github.com/red-hat-storage/odf-cli
 
-go 1.25.9
+go 1.25.10
 
 require (
 	github.com/noobaa/noobaa-operator/v5 v5.0.0-20260128131222-4e19231ff259
