@@ -1,5 +1,5 @@
 # noobaa-operator git tag or branch for OB/OBC CRDs
-NOOBAA_OPERATOR_VERSION ?= 5.22
+NOOBAA_OPERATOR_VERSION ?= master
 
 build: gen-noobaa-crds
 	find . -type f -name '*.go' -print0 | xargs -0 gofmt -w
