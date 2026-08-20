@@ -51,7 +51,7 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
   - `gather`:
     - `application`: Collect diagnostic data from your clusters (developer preview)
 - `odf object`:
-  - `enable remote-obc`: Install the ObjectBucket and ObjectBucketClaim CRDs bundled with the CLI (from noobaa-operator v5.21.0).
+  - `enable remote-obc`: Install the ObjectBucket and ObjectBucketClaim CRDs bundled with the CLI (from noobaa-operator master).
   - `disable remote-obc`: Uninstall those CRDs from the cluster.
 - `odf noobaa`: Run a noobaa CLI command. Supports all the noobaa cli arguments available in odf.
 - `odf help` : Display help text
