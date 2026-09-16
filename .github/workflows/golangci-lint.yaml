@@ -1,6 +1,11 @@
 name: golangci-lint
 on:
   push:
+    tags:
+      - v*
+    branches:
+      - main
+      - release-*
   pull_request:
 
 # cancel the in-progress workflow when PR is refreshed.
