@@ -3,6 +3,11 @@ name: Go Test
 on:
   pull_request:
   push:
+    tags:
+      - v*
+    branches:
+      - main
+      - release-*
 
 defaults:
   run:
