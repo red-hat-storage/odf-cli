@@ -6,7 +6,7 @@ require (
 	github.com/ceph/ceph-csi-operator/api v0.0.0-20260527105556-70b2f7cfddf0
 	github.com/noobaa/noobaa-operator/v5 v5.22.0
 	github.com/pkg/errors v0.9.1
-	github.com/ramendr/ramenctl v0.25.0
+	github.com/ramendr/ramenctl v0.25.1
 	github.com/red-hat-storage/ocs-client-operator/api v0.0.0-20260331224201-4379cf15edad
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
 	github.com/rook/kubectl-rook-ceph v0.9.7-0.20260810151005-b7afbc10fe58
@@ -190,8 +190,8 @@ require (
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.67.5 // indirect
 	github.com/prometheus/procfs v0.20.1 // indirect
-	github.com/ramendr/ramen/api v0.0.0-20260708142616-0e17c0d9913e // indirect
-	github.com/ramendr/ramen/e2e v0.0.0-20260708142616-0e17c0d9913e // indirect
+	github.com/ramendr/ramen/api v0.0.0-20260820171631-6ec7115daad9 // indirect
+	github.com/ramendr/ramen/e2e v0.0.0-20260820171631-6ec7115daad9 // indirect
 	github.com/ramendr/recipe v0.0.0-20250507125257-0295a01da567 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/rook/rook/pkg/apis v0.0.0-20260707190630-b40e86043ad9 // indirect
