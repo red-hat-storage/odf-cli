@@ -13,7 +13,7 @@ The ODF CLI tool provides configuration and troubleshooting commands for OpenShi
     - `log-level <daemon> <subsystem> <log-level>`: Set the log level for Ceph daemons like OSD, mon, mds etc. More information about the ceph subsystems can be found [here](https://docs.ceph.com/en/latest/rados/troubleshooting/log-and-debug/#ceph-subsystems)
 - `odf get`:
   - `recovery-profile`: Get the recovery profile value.
-  - `health`: Check health of the cluster and common configuration issues.
+  - `health`: Print StorageCluster-managed CR status only. Use `--verbose` for checking health of the cluster and common configuration issues. The CR status table is included.
   - `dr-health [ceph status args]`: Print the ceph status of a peer cluster in a mirroring-enabled environment thereby validating connectivity between ceph clusters. Ceph status args can be optionally passed, such as to change the log level: --debug-ms 1.
   - `dr-prereq <PeerManagedClusterName>` : Print the status of pre-requisites for Disaster Recovery between peer clusters.
   - `mon-endpoints`: Print mon endpoints.
