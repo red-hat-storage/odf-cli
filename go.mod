@@ -2,7 +2,7 @@ module github.com/red-hat-storage/odf-cli
 
 go 1.23.1
 
-toolchain go1.23.7
+toolchain go1.23.10
 
 require (
 	github.com/pkg/errors v0.9.1
