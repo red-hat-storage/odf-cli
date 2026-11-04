@@ -234,7 +234,7 @@ func statusMessage(obj unstructured.Unstructured, spec kindSpec, now time.Time) 
 
 // lastHeartbeatMessage formats status.lastHeartbeat as
 // "Last heartbeat from the client was 20s ago".
-// Missing, empty, or unparseable timestamps return "-".
+// Missing, empty, or unparsable timestamps return "-".
 func lastHeartbeatMessage(obj map[string]interface{}, now time.Time) string {
 	lastHeartbeat, found, err := unstructured.NestedString(obj, "status", "lastHeartbeat")
 	if err != nil || !found || lastHeartbeat == "" {
