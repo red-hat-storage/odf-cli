@@ -9,7 +9,7 @@ require (
 	github.com/ramendr/ramenctl v0.26.0
 	github.com/red-hat-storage/ocs-client-operator/api v0.0.0-20260331224201-4379cf15edad
 	github.com/red-hat-storage/ocs-operator/api/v4 v4.0.0-20240701091545-dfffbde82a9d
-	github.com/rook/kubectl-rook-ceph v0.9.7-0.20260810151005-b7afbc10fe58
+	github.com/rook/kubectl-rook-ceph v0.9.7-0.20261103165554-b2e68a224150
 	github.com/rook/rook v1.21.1
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
@@ -152,7 +152,7 @@ require (
 	github.com/kedacore/keda/v2 v2.21.0 // indirect
 	github.com/klauspost/compress v1.20.0 // indirect
 	github.com/kube-object-storage/lib-bucket-provisioner v0.0.0-20260420161730-5164e3746489 // indirect
-	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.6.0 // indirect
+	github.com/kubernetes-csi/external-snapshotter/client/v8 v8.7.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/lib/pq v1.12.3 // indirect
 	github.com/libopenstorage/secrets v0.0.0-20260901190741-925417d11ff0 // indirect
