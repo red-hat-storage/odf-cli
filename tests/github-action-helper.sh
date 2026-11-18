@@ -164,6 +164,48 @@ deploy_rook() {
     echo "Rook-Ceph deployment completed successfully!"
 }
 
+# CI deploys Rook only. Install a dummy StorageCluster API so
+# `odf get health` can list CRs.
+install_dummy_storagecluster() {
+    local cluster_ns="${1:-openshift-storage}"
+
+    echo "Installing dummy StorageCluster CRD and CR in namespace $cluster_ns"
+
+    kubectl apply -f - <<'EOF'
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: storageclusters.ocs.openshift.io
+spec:
+  group: ocs.openshift.io
+  names:
+    kind: StorageCluster
+    listKind: StorageClusterList
+    plural: storageclusters
+    singular: storagecluster
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          x-kubernetes-preserve-unknown-fields: true
+EOF
+
+    kubectl wait --for=condition=Established crd/storageclusters.ocs.openshift.io --timeout=60s
+
+    kubectl apply -f - <<EOF
+apiVersion: ocs.openshift.io/v1
+kind: StorageCluster
+metadata:
+  name: ocs-storagecluster
+  namespace: ${cluster_ns}
+spec: {}
+EOF
+}
+
 #################
 # WAIT FUNCTIONS
 #################
