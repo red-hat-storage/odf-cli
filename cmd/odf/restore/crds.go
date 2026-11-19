@@ -109,6 +109,32 @@ var deletedCmd = &cobra.Command{
 				// ocs.openshift.io/v1alpha1
 				{Group: "ocs.openshift.io", Version: "v1alpha1", Resource: "storageconsumers"},
 			}
+		} else if slices.Contains(newArgs, "cephclusters") {
+			customResources = []pkgrestore.CustomResource{
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephblockpoolradosnamespaces"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephblockpools"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephclients"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephfilesystems"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephfilesystemsubvolumegroups"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephnfses"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephobjectstores"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephobjectstoreusers"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephobjectrealms"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephobjectzonegroups"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephobjectzones"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephrbdmirrors"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephfilesystemmirrors"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephbucketnotifications"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephbuckettopics"},
+				{Group: "ceph.rook.io", Version: "v1", Resource: "cephcosidrivers"},
+			}
+		} else if slices.Contains(newArgs, "noobaas") {
+			customResources = []pkgrestore.CustomResource{
+				{Group: "noobaa.io", Version: "v1alpha1", Resource: "backingstores"},
+				{Group: "noobaa.io", Version: "v1alpha1", Resource: "bucketclasses"},
+				{Group: "noobaa.io", Version: "v1alpha1", Resource: "namespacestores"},
+				{Group: "noobaa.io", Version: "v1alpha1", Resource: "noobaaaccounts"},
+			}
 		} else {
 			customResources = []pkgrestore.CustomResource{}
 		}

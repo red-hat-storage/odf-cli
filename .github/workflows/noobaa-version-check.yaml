@@ -1,0 +1,37 @@
+# Validate indirect dependency bumps if they break noobaa-operator.
+name: NooBaa Operator Version Check
+
+on:
+  pull_request:
+    paths:
+      - go.mod
+      - go.sum
+  push:
+    paths:
+      - go.mod
+      - go.sum
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail -x {0}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  noobaa-version-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build noobaa-operator packages
+        run: go build github.com/noobaa/noobaa-operator/v5/...

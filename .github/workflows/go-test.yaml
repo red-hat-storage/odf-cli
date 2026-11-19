@@ -80,6 +80,7 @@ jobs:
         shell: bash
         run: |
           ./bin/odf --help
+          tests/github-action-helper.sh install_dummy_storagecluster
           ./bin/odf get health
           ./bin/odf ceph status
           ./bin/odf get rook-status
