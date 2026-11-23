@@ -53,6 +53,90 @@ DEFAULT_CLUSTER_NS="rook-ceph"
 
 DEFAULT_TIMEOUT=600
 
+# Tool versions
+CRICTL_VERSION="v1.31.1"
+MINIKUBE_VERSION="v1.35.0"
+CRI_DOCKERD_VERSION="v0.3.21"
+CNI_PLUGIN_VERSION="v1.6.0"
+
+# Source: https://github.com/rook/kubectl-rook-ceph/blob/master/tests/github-action-helper.sh
+install_minikube_with_none_driver() {
+    local kubernetes_version="$1"
+
+    if [[ -z "$kubernetes_version" ]]; then
+        echo "Error: Kubernetes version must be specified" >&2
+        echo "Usage: install_minikube_with_none_driver <k8s-version>" >&2
+        return 1
+    fi
+
+    echo "Installing minikube with Kubernetes $kubernetes_version"
+
+    # Install system dependencies
+    sudo apt update
+    sudo apt install -y conntrack socat
+
+    # Install minikube
+    echo "Installing minikube $MINIKUBE_VERSION..."
+    if ! curl -LO "https://storage.googleapis.com/minikube/releases/$MINIKUBE_VERSION/minikube-linux-amd64"; then
+        echo "Failed to download minikube binary" >&2
+        return 1
+    fi
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    rm -f minikube-linux-amd64
+
+    # Install container runtime interface
+    local cri_dockerd_ver="${CRI_DOCKERD_VERSION#v}"
+    echo "Installing cri-dockerd $CRI_DOCKERD_VERSION..."
+    if ! curl -LO "https://github.com/Mirantis/cri-dockerd/releases/download/${CRI_DOCKERD_VERSION}/cri-dockerd_${cri_dockerd_ver}.3-0.ubuntu-focal_amd64.deb"; then
+        echo "Failed to download cri-dockerd" >&2
+        return 1
+    fi
+    sudo dpkg -i "cri-dockerd_${cri_dockerd_ver}.3-0.ubuntu-focal_amd64.deb"
+    rm -f "cri-dockerd_${cri_dockerd_ver}.3-0.ubuntu-focal_amd64.deb"
+
+    # Install crictl (container runtime CLI)
+    echo "Installing crictl $CRICTL_VERSION..."
+    if ! curl -LO "https://github.com/kubernetes-sigs/cri-tools/releases/download/$CRICTL_VERSION/crictl-$CRICTL_VERSION-linux-amd64.tar.gz"; then
+        echo "Failed to download crictl" >&2
+        return 1
+    fi
+    sudo tar zxf "crictl-$CRICTL_VERSION-linux-amd64.tar.gz" -C /usr/local/bin
+    rm -f "crictl-$CRICTL_VERSION-linux-amd64.tar.gz"
+
+    # Configure system settings
+    sudo sysctl fs.protected_regular=0
+
+    # Install CNI plugins
+    echo "Installing CNI plugins $CNI_PLUGIN_VERSION..."
+    local cni_plugin_tar="cni-plugins-linux-amd64-$CNI_PLUGIN_VERSION.tgz"
+    local cni_plugin_install_dir="/opt/cni/bin"
+
+    if ! curl -LO "https://github.com/containernetworking/plugins/releases/download/$CNI_PLUGIN_VERSION/$cni_plugin_tar"; then
+        echo "Failed to download CNI plugins" >&2
+        return 1
+    fi
+    sudo mkdir -p "$cni_plugin_install_dir"
+    sudo tar -xf "$cni_plugin_tar" -C "$cni_plugin_install_dir"
+    rm "$cni_plugin_tar"
+
+    # Start minikube cluster
+    echo "Starting minikube cluster..."
+    export MINIKUBE_HOME=$HOME CHANGE_MINIKUBE_NONE_USER=true KUBECONFIG=$HOME/.kube/config
+    if ! minikube start \
+        --kubernetes-version="$kubernetes_version" \
+        --driver=none \
+        --container-runtime=docker \
+        --memory 6g \
+        --cpus=2 \
+        --addons ingress \
+        --cni=calico; then
+        echo "ERROR: minikube start failed" >&2
+        return 1
+    fi
+
+    echo "Minikube installation completed successfully!"
+}
+
 download_and_modify_yaml() {
     local url="$1"
     local output_file="$2"
