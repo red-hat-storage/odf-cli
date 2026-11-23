@@ -4,53 +4,77 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/pkg/errors"
 	"github.com/red-hat-storage/odf-cli/cmd/odf/root"
-	"github.com/red-hat-storage/odf-cli/pkg/rook/osd"
-	"github.com/rook/kubectl-rook-ceph/pkg/logging"
-	"github.com/rook/kubectl-rook-ceph/pkg/mons"
+	"github.com/red-hat-storage/odf-cli/pkg/ceph"
 	"github.com/rook/kubectl-rook-ceph/pkg/rook"
 	"github.com/spf13/cobra"
 )
 
 var CephPurgeOsdCmd = &cobra.Command{
-	Use:     "purge-osd",
-	Short:   "Permanently remove an OSD from the cluster.",
-	Args:    cobra.ExactArgs(1),
-	Example: "odf purge-osd <ID>",
-	PreRunE: validateOsdID,
+	Use:   "purge-osd",
+	Short: "Permanently remove an OSD from the cluster.",
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
-		forceflagValue := "false"
-		osdID := args[0]
 
-		safeToDestroy, err := osd.SafeToDestroy(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID)
-		if !safeToDestroy {
-			var answer string
-			yesForceDestroyOSD := "yes-force-destroy-osd"
-			logging.Warning("Are you sure you want to purge osd.%s? The OSD is *not* safe to destroy. This may lead to data loss. If you are sure the OSD should be purged, enter '%s'", osdID, yesForceDestroyOSD)
-			fmt.Scanf("%s", &answer) //nolint:errcheck // validation happens in PromptToContinueOrCancel
+		osdID := ceph.SelectUnhealthyOSD(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace)
+		osdIDStr := strconv.Itoa(osdID)
 
-			err := mons.PromptToContinueOrCancel(yesForceDestroyOSD, answer)
-			if err != nil {
-				logging.Fatal(err)
-			}
-
-			forceflagValue = "true"
-		} else if err != nil {
-			logging.Fatal(errors.Wrapf(err, "failed to check if osd.%s is safe to destroy", osdID))
+		// LSO operator must be scaled down before purging
+		// to prevent LSO from reprovisioning the disk we are about to wipe
+		stopPurge, isLSO := ceph.CheckLSOScaledDown(ctx, root.ClientSets)
+		if stopPurge {
+			fmt.Println("Purge cancelled.")
+			return
 		}
 
-		rook.PurgeOsds(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, forceflagValue)
+		// show cluster health before making any changes
+		// a pre-existing HEALTH_WARN or HEALTH_ERR may indicate that safeToDestroy
+		// will not return true, or that the cluster is already under stress.
+		if !ceph.ClusterHealthCheck(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace) {
+			fmt.Println("Purge cancelled.")
+			return
+		}
+
+		// gather OSD details from k8s (deployment, PVC, PV) before any deletion
+		details := ceph.GatherOSDDetails(ctx, root.ClientSets, root.StorageClusterNamespace, osdID)
+
+		if !ceph.StopOSDIfRunning(ctx, root.ClientSets, root.StorageClusterNamespace, details) {
+			fmt.Println("Purge cancelled.")
+			return
+		}
+
+		if !ceph.MarkOSDOut(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdID, osdIDStr) {
+			fmt.Println("Purge cancelled.")
+			return
+		}
+
+		// returns true if force removal should be used (user chose not to wait)
+		forceRemoval := ceph.DataMigrationPrompt(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdIDStr, osdID)
+
+		ceph.PrintDryRun(details)
+
+		if !ceph.PromptYN("Proceed with purge?") {
+			fmt.Println("Purge cancelled.")
+			return
+		}
+
+		// execute the purge via the Rook operator.
+		// on failure, the process exits. on success, it returns and we print the result below.
+		forceFlagValue := "false"
+		if forceRemoval {
+			forceFlagValue = "true"
+		}
+		rook.PurgeOsds(ctx, root.ClientSets, root.OperatorNamespace, root.StorageClusterNamespace, osdIDStr, forceFlagValue)
+
+		fmt.Println()
+		fmt.Println("Purge complete.")
+		fmt.Println("A new PVC is pending (awaiting disk).")
+		fmt.Println()
+
+		if isLSO {
+			fmt.Println("Next steps:")
+			fmt.Println("Replace the physical disk and enable diskmaker-manager, then scale the LSO operator back up.")
+			fmt.Println("If reusing the same disk: enable diskmaker-manager and scale the LSO operator back up.")
+		}
 	},
-}
-
-func validateOsdID(cmd *cobra.Command, args []string) error {
-	osdID := args[0]
-	_, err := strconv.Atoi(osdID)
-	if err != nil {
-		return fmt.Errorf("invalid ID %s, the OSD ID must be an integer. %v", osdID, err)
-	}
-
-	return nil
 }
