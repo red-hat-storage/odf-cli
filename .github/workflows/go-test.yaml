@@ -31,36 +31,26 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: consider (pre-job) debugging
+        uses: ./.github/workflows/upterm_debug
+        with:
+          debug-ci: ${{ contains(github.event.pull_request.labels.*.name, 'debug-ci') }}
+
       - name: Set up Go
         uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
           cache: true
 
-      - name: Install cri-dockerd
-        run: |
-          curl -LO https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.21/cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
-          sudo dpkg -i cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
-          rm -f cri-dockerd_0.3.21.3-0.ubuntu-focal_amd64.deb
-
       - name: Setup Minikube
-        uses: medyagh/setup-minikube@latest
-        with:
-          minikube-version: "1.37.0"
-          kubernetes-version: v1.35.0
-          driver: none
-          container-runtime: docker
-          memory: 6g
-          cpus: 2
-          addons: ingress
-          cni: calico
+        run: tests/github-action-helper.sh install_minikube_with_none_driver v1.32.13
 
-      - name: Wait for cluster ready
-        shell: bash
+      - name: print k8s cluster status
         run: |
+          kubectl cluster-info
+          kubectl get pods -n kube-system
           kubectl wait --for=condition=Ready nodes --all --timeout=300s
           kubectl get nodes -o wide
-          kubectl cluster-info
 
       - name: use local disk
         run: tests/github-action-helper.sh use_local_disk
@@ -90,9 +80,3 @@ jobs:
         uses: ./.github/workflows/collect-logs
         with:
           name: go-test
-
-      - name: consider debugging
-        if: failure()
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: false
